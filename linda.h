@@ -1,9 +1,9 @@
+#ifndef linda_h
+#define linda_h
 #include <stdio.h>
 #include <math.h>
-#ifndef eksponen_h
-#define eksponen_h
 
-int main(){
+int eksponen(){
     double x, y;
     printf ("Masukkan nilai angka bilangan: ");
     scanf ("%lf", &x);
@@ -13,5 +13,4 @@ int main(){
     printf("Eksponen dari %lf pangkat %lf adalah %lf: ", x, y, pow (x, y));
     return 0;
 }
-
 #endif
