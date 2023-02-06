@@ -1,5 +1,3 @@
-#ifndef konversi_suhu_h
-#define konversi_suhu_h
 #include <stdio.h>
 
 double celsius_kelvin(double celsius) {
@@ -34,7 +32,7 @@ void menu_suhu (int tipe_suhu, double celsius){
 	}
 }
 
-void pilih_menu(int *tipe_suhu, double *celsius){
+void pilih_menu_suhu(int *tipe_suhu, double *celsius){
 	printf("Masukkan suhu dalam derajat Celsius: ");
 	scanf("%lf", celsius);
 	printf("Pilih satuan suhu tujuan:\n");
@@ -48,8 +46,7 @@ void pilih_menu(int *tipe_suhu, double *celsius){
 int main(){
 	int tipe_suhu;
 	double celsius;
-	pilih_menu(&tipe_suhu, &celsius);
+	pilih_menu_suhu(&tipe_suhu, &celsius);
 	menu_suhu(tipe_suhu, celsius);
 	return 0;
 }
-#endif
