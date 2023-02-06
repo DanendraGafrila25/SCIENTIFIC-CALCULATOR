@@ -1,5 +1,5 @@
-#ifndef koversi_suhu_h
-#define konversi_suhu_h
+#ifndef Aqila_h
+#define Aqila_h
 #include <stdio.h>
 
 double celsius_kelvin(double celsius) {

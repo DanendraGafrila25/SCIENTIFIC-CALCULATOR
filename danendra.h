@@ -1,5 +1,5 @@
-#ifndef trigonometri_h
-#define trigonometri_h
+#ifndef danendra_h
+#define danendra_h
 
 #include <math.h>
 #include <stdio.h>
@@ -14,7 +14,7 @@ int trigonometri()
     printf("pilihan trigonometri : ");
     scanf("%d",&pilihan_convert);
 
-    swich(pilihan_convert){
+    switch(pilihan_convert){
         case 1 :
     printf("Masukkan nilai sudut dalam radian: ");
     scanf("%lf", &x);
@@ -41,9 +41,7 @@ int trigonometri()
         
         default :
         printf("pilihan tidak valid !");
-
-
     }
-
+}
 
 #endif

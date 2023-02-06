@@ -20,9 +20,4 @@ void inputAngka(){
 	printf("Hasil Penjumlahan : %d", hasil);
 }
 
-int main (){
-	inputAngka();
-	
-	return 0;
-}
 #endif
