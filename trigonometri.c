@@ -1,8 +1,3 @@
-#ifndef trigonometri_h
-#define trigonometri_h
-#include <math.h>
-#include <stdio.h>
-
 int trigonometri()
 {   
     double x, result;
@@ -43,9 +38,3 @@ int trigonometri()
 
 
     }
-}
-
-
-
-
-#endif
