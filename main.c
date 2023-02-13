@@ -15,7 +15,7 @@ int main(){
 	printf("1. Operasi hitung\n");
 	printf("2. Konversi suhu\n");
 	printf("3. Matriks\n");
-//	printf("4. Statistika\n");
+	printf("4. Statistika\n");
 	printf("Input : ");
 	scanf("%d", &pilihMenu);
 	switch (pilihMenu){
@@ -32,10 +32,10 @@ int main(){
 			system("cls");
 			menu_matriks();
 			break;
-//        case 4:
-//          system("cls");
-//			statistika();
-//          break;
+       case 4:
+         system("cls");
+		 statistika();
+         break;
 		default:
 			system("cls");
 			main();
