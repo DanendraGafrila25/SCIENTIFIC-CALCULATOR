@@ -3,15 +3,8 @@
 #include <stdio.h>
 #include <math.h>
 
-int eksponen(){
-    int x, y;
-    printf ("Masukkan nilai angka bilangan: ");
-    scanf ("%d", &x);
-    printf (" Masukkan nilai pangkat: ");
-    scanf ("%d", &y);
-
-    printf("Eksponen dari %d pangkat %d adalah %d: ", x, y, pow (x, y));
-    return 0;
+double eksponen(double a,double b){
+   return pow(a,b);
 }
 
 int logaritma() {
