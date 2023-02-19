@@ -14,15 +14,15 @@ double perform_operation(double num1, double num2, char operator) {
 		case 't':
       		return trigonometri(num1, operator);
 		case '^':
-            return pow(num1, num2);
+            return eksponen(num1,num2);
         case '*':
-            return num1 * num2;
+            return perkalian(num1,num2);
         case '/':
-            return num1 / num2;
+            return pembagian(num1,num2);
         case '+':
-            return num1 + num2;
+            return penjumlahan(num1,num2);
         case '-':
-            return num1 - num2;
+            return pengurangan(num1,num2);
         default:
             printf("Invalid operator: %c", operator);
             exit(1);
