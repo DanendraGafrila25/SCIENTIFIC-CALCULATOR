@@ -61,7 +61,6 @@ int main() {
   printf("4. Reamur\n");
   printf("Masukkan pilihan: ");
   scanf("%d", & pilihan);
-  
   printf("Masukkan suhu: ");
   scanf("%lf", & suhu);
 
