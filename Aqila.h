@@ -244,7 +244,6 @@ void konversi_waktu() {
     double hour = menit_ke_jam(menit);
     printf("%d menit adalah %0.2f jam", menit, hour);
     break;
-
   case 6:
     printf("Masukkan menit: ");
     scanf("%d", & menit);
