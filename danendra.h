@@ -1,111 +1,164 @@
 #ifndef danendra_h
 #define danendra_h
 
-#include <math.h>
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include "Aqila.h"
+#include "faras.h"
+#include "linda.h"
 
-int compare(const void *a, const void *b) {
-    return (*(float*)a - *(float*)b);
-}
-double trigonometri(double x, char trig){   
-    x = (x * M_PI) / 180;
-	switch(trig){
-        case 's' :
-	    	return sin(x);
-        case 'c' :  
-			return cos(x);
-        case 't' :
-        	return tan(x);
-        default :
-       	 printf("pilihan tidak valid !");
-    }
+// fungsi untuk menghitung kombinasi
+int combination(int n, int r) {
+    int numerator = faktorial(n);
+    int denominator = faktorial(r) * faktorial(n-r);
+    int result = numerator / denominator;
+    return result;
 }
 
-    float hitungRataRata(float bilangan[], int jumlahBilangan) {
-        int i;
-        float total = 0;
+int prioritas(char operator) {
+    
+    if (operator == '+' || operator == '-')
+        return 1;
+    else if (operator == '*' || operator == '/')
+        return 2;
+    else if (operator == '^' || operator == 'L' || operator == '!' || operator == 'V' || operator == 'C')
+        return 3;
+    else if (operator == '(' || operator == ')')
+        return 0; 
+    else
+        return -1;
+        exit(1);
+    
+}
 
-        for (i = 0; i < jumlahBilangan; i++) {
-            total += bilangan[i];
-        }
-
-        return total / jumlahBilangan;
+double perform_trig_operation(double sudut, char op[]) {
+	sudut = (sudut * M_PI)/180;
+    if (strcmp(op, "sec(") == 0) {
+		return 1.0 / cos(sudut);
+    } else if (strcmp(op, "csc(") == 0) {
+		return 1.0 / sin(sudut);
+    } else if (strcmp(op, "cot(") == 0) {
+		return 1.0 / tan(sudut);
+    } else if (strcmp(op, "sin(") == 0) {
+    	return sin(sudut);
+    } else if (strcmp(op, "cos(") == 0) {
+        return cos(sudut);
+    } else if (strcmp(op, "tan(") == 0) {
+        return tan(sudut);
+    } else {
+        return 0;
     }
+}
 
-    float hitungMedian(float bilangan[], int jumlahBilangan) {
-        float median;
-
-        qsort(bilangan, jumlahBilangan, sizeof(float), compare);
-
-        if (jumlahBilangan % 2 == 0) {
-            median = (bilangan[jumlahBilangan / 2 - 1] + bilangan[jumlahBilangan / 2]) / 2;
-        } else {
-            median = bilangan[jumlahBilangan / 2];
-        }
-
-        return median;
+double operasi(double bil1, double bil2, char operator) {
+    switch (operator) {
+    	case 'C' :
+    		return combination((int)bil1,(int)bil2);  
+    	case 'V' :
+    		return  akar(bil1,bil2);
+    	case 'L' :
+    		return  logaritma(bil1);
+    	case '!' :
+    		return faktorial(bil1);
+        case '^':
+            return eksponen(bil1, bil2);
+        case '*':
+            return perkalian(bil1,bil2);
+        case '/':
+            return pembagian(bil1,bil2);
+        case '+':
+            return penjumlahan(bil1, bil2);
+        case '-':
+            return pengurangan(bil1, bil2);
+        default:
+            printf("Invalid operator: %c", operator);
+            return 0;
     }
+}
 
-    float hitungModus(float bilangan[], int jumlahBilangan) {
-        int i, j, count;
-        float maxCount = 0, maxValue, modus;
-
-        for (i = 0; i < jumlahBilangan; i++) {
-            count = 1;
-            for (j = i + 1; j < jumlahBilangan; j++) {
-                if (bilangan[i] == bilangan[j]) {
-                    count++;
+void Operasi_hitung(){
+	for(;;){
+    	char ekspresi[100];
+		double bil2, bil1, operand_stack[100];
+	    int operand_top = -1;
+	    char operator_stack[100], operator;
+	    int operator_top = -1;
+	    int i;
+    	system("cls");
+    	printf("ekspresi : ");
+	    scanf("%s", ekspresi);
+	    for (i = 0; ekspresi[i]; i++) {
+	        if (isdigit(ekspresi[i])) {
+	            char number[100];
+	            int number_top = 0;
+	            while (isdigit(ekspresi[i]) || ekspresi[i] == '.') {
+					number[number_top++] = ekspresi[i++];
+	            }
+	            number[number_top] = '\0';
+	            operand_stack[++operand_top] = atof(number);
+	            i--;
+	        } else if (ekspresi[i] == '(') {
+	            operator_stack[++operator_top] = ekspresi[i];
+	        } else if (ekspresi[i] == ')') {
+	            while (operator_stack[operator_top] != '(') {
+	                bil2 = operand_stack[operand_top--];
+	                bil1 = operand_stack[operand_top--];
+	                operator = operator_stack[operator_top--];
+	                operand_stack[++operand_top] = operasi(bil1, bil2, operator);
+	            }
+	            operator_top--;
+	        } else if (ekspresi[i] == '[') {
+                i++;
+                char number[100];
+                int number_top = 0;
+                while (ekspresi[i] != ']') {
+                    number[number_top++] = ekspresi[i++];
                 }
-            }
-            if (count > maxCount) {
-                maxCount = count;
-                maxValue = bilangan[i];
-            }
-        }
-
-        modus = maxValue;
-
-        return modus;
-    }
-
-    double statistika()
-    {
-        int jumlahBilangan, i, pilihan;
-        float bilangan[100], rataRata, median, modus;
-
-        // Meminta pengguna untuk memasukkan jumlah bilangan
-        printf("Masukkan jumlah bilangan: ");
-        scanf("%d", &jumlahBilangan);
-
-        // Meminta pengguna untuk memasukkan bilangan
-        for (i = 0; i < jumlahBilangan; i++) {
-            printf("Masukkan bilangan ke-%d: ", i + 1);
-            scanf("%f", &bilangan[i]);
-        }
-        printf("akan dihitung dalam bentuk apa bilangan tersebut :\n");
-        printf("1. Rata-Rata\n");
-        printf("2. Median\n");
-        printf("3. Modus\n");
-        printf("masukkan pilihan :");
-        scanf("%d",&pilihan);
-        switch(pilihan){
-            case 1 :
-                rataRata = hitungRataRata(bilangan, jumlahBilangan);
-               printf("rata-rata dari %d bilangan adalah: %.2f\n", jumlahBilangan, rataRata);
-                 break ;
-            case 2 :
-                median = hitungMedian(bilangan, jumlahBilangan);
-                printf("median dari %d bilangan adalah: %.2f\n", jumlahBilangan, median);
-               	break ;
-            case 3 :
-                modus = hitungModus(bilangan, jumlahBilangan);
-                printf("modus dari %d bilangan adalah: %.2f\n", jumlahBilangan, modus);
-                 break ;
-            default :
-                printf("pilihan tidak valid !");
-        }
-    }
-
-
+                number[number_top] = '\0';
+                operand_stack[++operand_top] = atof(number);
+                operand_stack[operand_top] = operand_stack[operand_top];
+            } else if (ekspresi[i] == 's' || ekspresi[i] == 'c' || ekspresi[i] == 't'){
+            	char trigono[6];
+            	int j=0;
+            	char number[100];
+            	int bil;
+            	int number_top = 0;
+            	while(ekspresi[i]!=')'){
+            		if(isdigit(ekspresi[i]) || ekspresi[i] == '.'){
+            			number[number_top++] = ekspresi[i++];
+					}else {
+				        // menyimpan operator trigonometri
+				        trigono[j++] = ekspresi[i++];
+				        trigono[6] = '\0';
+				    }
+				}
+				operand_stack[++operand_top] = atof(number);
+				bil = operand_stack[operand_top];
+				operand_stack[operand_top]=perform_trig_operation(bil, trigono);
+			}  else {
+	            while (operator_top >= 0 && prioritas(operator_stack[operator_top]) >= prioritas(ekspresi[i])) {
+	                bil2 = operand_stack[operand_top--];
+	                bil1 = operand_stack[operand_top--];
+	                operator = operator_stack[operator_top--];
+	                operand_stack[++operand_top] = operasi(bil1, bil2, operator);
+	            }
+	            operator_stack[++operator_top] = ekspresi[i];
+			}
+		}
+		while (operator_top >= 0) {
+		    bil2 = operand_stack[operand_top--];
+		    bil1 = operand_stack[operand_top--];
+		    operator = operator_stack[operator_top--];
+		    operand_stack[++operand_top] = operasi(bil1, bil2, operator);
+		}
+		
+		printf("Result: %g\n", operand_stack[0]);
+		system("pause");
+		system("cls");
+		main();
+	}
+}
 
 #endif
