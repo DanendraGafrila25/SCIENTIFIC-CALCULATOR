@@ -17,7 +17,7 @@ int combination(int n, int r) {
     return result;
 }
 
-int prioritas(char operator) {
+int operasi_prioritas(char operator) {
     
     if (operator == '+' || operator == '-')
         return 1;
@@ -33,7 +33,7 @@ int prioritas(char operator) {
     
 }
 
-double perform_trig_operation(double sudut, char op[]) {
+double operasi_trigono(double sudut, char op[]) {
 	sudut = (sudut * M_PI)/180;
     if (strcmp(op, "sec(") == 0) {
 		return 1.0 / cos(sudut);
@@ -126,9 +126,9 @@ void Operasi_hitung(){
 				}
 				operand_stack[++operand_top] = atof(number);
 				bil = operand_stack[operand_top];
-				operand_stack[operand_top]=perform_trig_operation(bil, trigono);
+				operand_stack[operand_top]=operasi_trigono(bil, trigono);
 			}  else {
-	            while (operator_top >= 0 && prioritas(operator_stack[operator_top]) >= prioritas(ekspresi[i])) {
+	            while (operator_top >= 0 && operasi_prioritas(operator_stack[operator_top]) >= operasi_prioritas(ekspresi[i])) {
 	                num2 = operand_stack[operand_top--];
 	                num1 = operand_stack[operand_top--];
 	                operator = operator_stack[operator_top--];
