@@ -17,7 +17,7 @@ int combination(int n, int r) {
     return result;
 }
 
-int operasi_prioritas(char operator) {
+int prioritas(char operator) {
     
     if (operator == '+' || operator == '-')
         return 1;
@@ -33,7 +33,7 @@ int operasi_prioritas(char operator) {
     
 }
 
-double operasi_trigono(double sudut, char op[]) {
+double perform_trig_operation(double sudut, char op[]) {
 	sudut = (sudut * M_PI)/180;
     if (strcmp(op, "sec(") == 0) {
 		return 1.0 / cos(sudut);
@@ -52,26 +52,26 @@ double operasi_trigono(double sudut, char op[]) {
     }
 }
 
-double operasi(double num1, double num2, char operator) {
+double operasi(double bil1, double bil2, char operator) {
     switch (operator) {
     	case 'C' :
-    		return combination((int)num1,(int)num2);  
+    		return combination((int)bil1,(int)bil2);  
     	case 'V' :
-    		return  akar(num1,num2);
+    		return  akar(bil1,bil2);
     	case 'L' :
-    		return  logaritma(num1);
+    		return  logaritma(bil1);
     	case '!' :
-    		return faktorial(num1);
+    		return faktorial(bil1);
         case '^':
-            return eksponen(num1, num2);
+            return eksponen(bil1, bil2);
         case '*':
-            return perkalian(num1,num2);
+            return perkalian(bil1,bil2);
         case '/':
-            return pembagian(num1,num2);
+            return pembagian(bil1,bil2);
         case '+':
-            return penjumlahan(num1, num2);
+            return penjumlahan(bil1, bil2);
         case '-':
-            return pengurangan(num1, num2);
+            return pengurangan(bil1, bil2);
         default:
             printf("Invalid operator: %c", operator);
             return 0;
@@ -81,7 +81,7 @@ double operasi(double num1, double num2, char operator) {
 void Operasi_hitung(){
 	for(;;){
     	char ekspresi[100];
-		double num2, num1, operand_stack[100];
+		double bil2, bil1, operand_stack[100];
 	    int operand_top = -1;
 	    char operator_stack[100], operator;
 	    int operator_top = -1;
@@ -103,12 +103,22 @@ void Operasi_hitung(){
 	            operator_stack[++operator_top] = ekspresi[i];
 	        } else if (ekspresi[i] == ')') {
 	            while (operator_stack[operator_top] != '(') {
-	                num2 = operand_stack[operand_top--];
-	                num1 = operand_stack[operand_top--];
+	                bil2 = operand_stack[operand_top--];
+	                bil1 = operand_stack[operand_top--];
 	                operator = operator_stack[operator_top--];
-	                operand_stack[++operand_top] = operasi(num1, num2, operator);
+	                operand_stack[++operand_top] = operasi(bil1, bil2, operator);
 	            }
 	            operator_top--;
+	        } else if (ekspresi[i] == '[') {
+                i++;
+                char number[100];
+                int number_top = 0;
+                while (ekspresi[i] != ']') {
+                    number[number_top++] = ekspresi[i++];
+                }
+                number[number_top] = '\0';
+                operand_stack[++operand_top] = atof(number);
+                operand_stack[operand_top] = operand_stack[operand_top];
             } else if (ekspresi[i] == 's' || ekspresi[i] == 'c' || ekspresi[i] == 't'){
             	char trigono[6];
             	int j=0;
@@ -126,22 +136,22 @@ void Operasi_hitung(){
 				}
 				operand_stack[++operand_top] = atof(number);
 				bil = operand_stack[operand_top];
-				operand_stack[operand_top]=operasi_trigono(bil, trigono);
+				operand_stack[operand_top]=perform_trig_operation(bil, trigono);
 			}  else {
-	            while (operator_top >= 0 && operasi_prioritas(operator_stack[operator_top]) >= operasi_prioritas(ekspresi[i])) {
-	                num2 = operand_stack[operand_top--];
-	                num1 = operand_stack[operand_top--];
+	            while (operator_top >= 0 && prioritas(operator_stack[operator_top]) >= prioritas(ekspresi[i])) {
+	                bil2 = operand_stack[operand_top--];
+	                bil1 = operand_stack[operand_top--];
 	                operator = operator_stack[operator_top--];
-	                operand_stack[++operand_top] = operasi(num1, num2, operator);
+	                operand_stack[++operand_top] = operasi(bil1, bil2, operator);
 	            }
 	            operator_stack[++operator_top] = ekspresi[i];
 			}
 		}
 		while (operator_top >= 0) {
-		    num2 = operand_stack[operand_top--];
-		    num1 = operand_stack[operand_top--];
+		    bil2 = operand_stack[operand_top--];
+		    bil1 = operand_stack[operand_top--];
 		    operator = operator_stack[operator_top--];
-		    operand_stack[++operand_top] = operasi(num1, num2, operator);
+		    operand_stack[++operand_top] = operasi(bil1, bil2, operator);
 		}
 		
 		printf("Result: %g\n", operand_stack[0]);
