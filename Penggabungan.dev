@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=SCIENTIFIC-CALCULATOR\operasi_hitung.h
+FileName=rizki.h
 CompileCpp=0
 Folder=
 Compile=1

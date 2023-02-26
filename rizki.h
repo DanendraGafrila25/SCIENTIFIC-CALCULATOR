@@ -35,7 +35,7 @@ void Hitungan_Lain(){
 	}
 }
 
-void inputMatrix(double matrix[MAX_ROW][MAX_COLUMN], int row, int column){
+void inputMatrix(double matrix[][MAX_COLUMN], int row, int column){
     int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < column; j++){
@@ -169,8 +169,10 @@ void menu_matriks(){
                 system("pause");
                 system("cls");
             }
-        }else if(!(choice >= 1 && choice <= 3)){
-        	printf("\n\nAnda memasukkan input yang salah, silahkan coba lagi!");
+        }else if(choice == 4){
+        	system("pause");
+		}else if(!(choice >= 1 && choice <= 3)){
+        	printf("\n\nAnda memasukkan input yang salah, silahkan coba lagi!\n");
         	system("pause");
         	system("cls");
 		}

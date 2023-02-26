@@ -15,7 +15,7 @@ int main(){
 	int pilihMenu;
 	printf("CALCULATOR-SCIENTIFIC KELOMPOK 4B\n\n");
 	printf("Pilih menu di bawah ini\n");
-	printf("\n1. Aritmatika\n2. DLL\n");
+	printf("\n1. Aritmatika\n2. DLL\n3. Exit\n");
 	printf("Input : ");
 	scanf("%d", &pilihMenu);
 	switch (pilihMenu){
@@ -27,7 +27,9 @@ int main(){
 			system("cls");
 			Hitungan_Lain();
 			break;
-
+		case 3:
+			printf("\nTerima kasih!");
+			exit(0);
 		default:
 			system("cls");
 			main();
