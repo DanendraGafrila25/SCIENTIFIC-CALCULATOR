@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_ROW 10
-#define MAX_COL 10
+#define MAX_ROW 5
+#define MAX_COLUMN 5
 
 void Hitungan_Lain(){
 	int pilihan;
-	printf("Hitungan Lain : \n1. Matriks\n2. Koversi Suhu\n3. Statistika\n4.Konversi Waktu\n");
+	printf("Hitungan Lain : \n1. Matriks\n2. Koversi Suhu\n3. Statistika\n4. Konversi Waktu\n");
 	printf("Pilihan :");
 	scanf("%d",&pilihan);
 	switch(pilihan){
@@ -35,79 +35,79 @@ void Hitungan_Lain(){
 	}
 }
 
-void inputMatrix(double mat[][MAX_COL], int row, int col){
+void inputMatrix(double matrix[MAX_ROW][MAX_COLUMN], int row, int column){
     int i, j;
     for (i = 0; i < row; i++){
-        for (j = 0; j < col; j++){
+        for (j = 0; j < column; j++){
             printf("Masukkan elemen matriks baris ke-%d kolom ke-%d: ", i + 1, j + 1);
-            scanf("%lf", &mat[i][j]);
+            scanf("%lf", &matrix[i][j]);
         }
     }
 }
 
-void addMatrix(double mat1[][MAX_COL], double mat2[][MAX_COL], double result[][MAX_COL], int row, int col){
+void addMatrix(double matrix1[][MAX_COLUMN], double matrix2[][MAX_COLUMN], double result[][MAX_COLUMN], int row, int column){
     int i, j;
     for (i = 0; i < row; i++){
-        for (j = 0; j < col; j++){
-            result[i][j] = mat1[i][j] + mat2[i][j];
+        for (j = 0; j < column; j++){
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
         }
     }
 }
 
-void subtractMatrix(double mat1[][MAX_COL], double mat2[][MAX_COL], double result[][MAX_COL], int row, int col){
+void subtractMatrix(double matrix1[][MAX_COLUMN], double matrix2[][MAX_COLUMN], double result[][MAX_COLUMN], int row, int column){
     int i, j;
     for (i = 0; i < row; i++){
-        for (j = 0; j < col; j++){
-            result[i][j] = mat1[i][j] - mat2[i][j];
+        for (j = 0; j < column; j++){
+            result[i][j] = matrix1[i][j] - matrix2[i][j];
         }
     }
 }
 
-void multiplyMatrix(double mat1[][MAX_COL], double mat2[][MAX_COL], double result[][MAX_COL], int row1, int col1, int col2){
+void multiplyMatrix(double matrix1[][MAX_COLUMN], double matrix2[][MAX_COLUMN], double result[][MAX_COLUMN], int row1, int column1, int column2){
     int i, j, k;
     for (i = 0; i < row1; i++){
-        for (j = 0; j < col2; j++){
+        for (j = 0; j < column2; j++){
             result[i][j] = 0;
-            for (k = 0; k < col1; k++){
-                result[i][j] += mat1[i][k] * mat2[k][j];
+            for (k = 0; k < column1; k++){
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
             }
         }
     }
 }
 
-void outputMatrix(double mat[][MAX_COL], int row, int col){
+void outputMatrix(double result[][MAX_COLUMN], int row, int column){
     int i, j;
     for (i = 0; i < row; i++){
-        for (j = 0; j < col; j++){
-            printf("%g\t", mat[i][j]);
+        for (j = 0; j < column; j++){
+            printf("%g\t", result[i][j]);
         }
         printf("\n");
     }
 }
 
-void matrixPertama(double mat[][MAX_COL], int row, int col){
+void matrixPertama(double matrix1[][MAX_COLUMN], int row1, int column1){
 	int i, j;
-    for (i = 0; i < row; i++){
-        for (j = 0; j < col; j++){
-            printf("%g\t", mat[i][j]);
+    for (i = 0; i < row1; i++){
+        for (j = 0; j < column1; j++){
+            printf("%g\t", matrix1[i][j]);
         }
         printf("\n");
     }
 }
 
-void matrixKedua(double mat[][MAX_COL], int row, int col){
+void matrixKedua(double matrix2[][MAX_COLUMN], int row2, int column2){
 	int i, j;
-    for (i = 0; i < row; i++){
-        for (j = 0; j < col; j++){
-            printf("%g\t", mat[i][j]);
+    for (i = 0; i < row2; i++){
+        for (j = 0; j < column2; j++){
+            printf("%g\t", matrix2[i][j]);
         }
         printf("\n");
     }
 }
 
 void menu_matriks(){
-    double mat1[MAX_ROW][MAX_COL], mat2[MAX_ROW][MAX_COL], result[MAX_ROW][MAX_COL];
-    int row1, col1, row2, col2, choice;
+    double matrix1[MAX_ROW][MAX_COLUMN], matrix2[MAX_ROW][MAX_COLUMN], result[MAX_ROW][MAX_COLUMN];
+    int row1, column1, row2, column2, choice;
 
     do{
         printf("Pilih operasi matriks:\n");
@@ -118,43 +118,60 @@ void menu_matriks(){
 		printf("Masukkan pilihan Anda: ");
 		scanf("%d", &choice);
         if (choice >= 1 && choice <= 3){
-            printf("\nMaksimal ordo matriks 10 x 10\n\n");
-            printf("Masukkan ordo matriks pertama (baris kolom): \n");
-            scanf("%d%d", &row1, &col1);
-            printf("Masukkan ordo matriks kedua (baris kolom): \n");
-            scanf("%d%d", &row2, &col2);
+            printf("\nMaksimal ordo matriks %d x %d\n\n", MAX_ROW, MAX_COLUMN);
+            printf("Masukkan jumlah ordo matriks pertama (baris x kolom): \n");
+            printf("Baris: ");
+            scanf("%d", &row1);
+            printf("Kolom:  ");
+            scanf("%d", &column1);
+            printf("\nMasukkan jumlah ordo matriks kedua (baris x kolom): \n");
+            printf("Baris: ");
+            scanf("%d", &row2);
+            printf("Kolom: ");
+            scanf("%d", &column2);
         
-            if (col1 != row2){
-                printf("Ordo matriks tidak sesuai untuk melakukan operasi!\n");
-            }else{
-                printf("Masukkan elemen matriks pertama:\n");
-                inputMatrix(mat1, row1, col1);
-                matrixPertama(mat1, row1, col1);
-                printf("Masukkan elemen matriks kedua:\n");
-                inputMatrix(mat2, row2, col2);
-                matrixKedua(mat2, row2, col2);
+            if ((choice == 1 || choice == 2) && (row1 != row2 || column1 != column2)) {
+			    printf("Ordo matriks tidak sesuai untuk melakukan operasi!\n");
+			    system("pause");
+        		system("cls");
+			} else if (choice == 3 && column1 != row2) {
+			    printf("Ordo matriks tidak sesuai untuk melakukan operasi!\n");
+				system("pause");
+        		system("cls");
+			} else if(row1 > MAX_ROW || row2 > MAX_ROW || column1 > MAX_COLUMN || column2 > MAX_COLUMN){
+				printf("Ordo matriks tidak sesuai untuk melakukan operasi!\n");
+				system("pause");
+        		system("cls");
+			} else {
+                printf("\n\nMasukkan elemen matriks pertama:\n");
+                inputMatrix(matrix1, row1, column1);
+                matrixPertama(matrix1, row1, column1);
+                printf("\n\nMasukkan elemen matriks kedua:\n");
+                inputMatrix(matrix2, row2, column2);
+                matrixKedua(matrix2, row2, column2);
                 switch (choice){
                 case 1:
-                    addMatrix(mat1, mat2, result, row1, col1);
-                    printf("Hasil penjumlahan matriks:\n");
+                    addMatrix(matrix1, matrix2, result, row1, column1);
+                    printf("\nHasil penjumlahan matriks:\n");
                     break;
                 case 2:
-                    subtractMatrix(mat1, mat2, result, row1, col1);
-                    printf("Hasil pengurangan matriks:\n");
+                    subtractMatrix(matrix1, matrix2, result, row1, column1);
+                    printf("\nHasil pengurangan matriks:\n");
                     break;
                 case 3:
-                    multiplyMatrix(mat1, mat2, result, row1, col1, col2);
-                    printf("Hasil perkalian matriks:\n");
+                    multiplyMatrix(matrix1, matrix2, result, row1, column1, column2);
+                    printf("\nHasil perkalian matriks:\n");
                     break;
                 }
 
-                outputMatrix(result, row1, col2);
+                outputMatrix(result, row1, column2);
                 printf("\n");
                 system("pause");
                 system("cls");
             }
         }else if(!(choice >= 1 && choice <= 3)){
         	printf("\n\nAnda memasukkan input yang salah, silahkan coba lagi!");
+        	system("pause");
         	system("cls");
 		}
     }while (choice != 4);

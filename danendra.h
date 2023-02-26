@@ -18,7 +18,6 @@ int combination(int n, int r) {
 }
 
 int prioritas(char operator) {
-    
     if (operator == '+' || operator == '-')
         return 1;
     else if (operator == '*' || operator == '/')
@@ -30,7 +29,6 @@ int prioritas(char operator) {
     else
         return -1;
         exit(1);
-    
 }
 
 double operasi_trigonometri(double sudut, char op[]) {

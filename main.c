@@ -12,8 +12,6 @@
 
 
 int main(){
-	int tipe_suhu;
-	double celsius;
 	int pilihMenu;
 	printf("CALCULATOR-SCIENTIFIC KELOMPOK 4B\n\n");
 	printf("Pilih menu di bawah ini\n");

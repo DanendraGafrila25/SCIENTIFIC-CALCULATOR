@@ -2,28 +2,20 @@
 #define penjumlahan_h
 #include <stdio.h>
 
-double penjumlahan(double a, double b)
-{
-	int hasil;
-    return hasil = a + b;
+double penjumlahan(double a, double b){
+    return a + b;
 }
 
-double pengurangan(double a, double b)
-{
-	int hasil;
-    return hasil = a - b;
+double pengurangan(double a, double b){
+    return a - b;
 }
 
-double perkalian(double a, double b)
-{
-	int hasil;
-    return hasil = a * b;
+double perkalian(double a, double b){
+    return a * b;
 }
 
-double pembagian(double a, double b)
-{
-	int hasil;
-    return hasil = a / b;
+double pembagian(double a, double b){
+    return a / b;
 }
 
 int faktorial(int angka){
