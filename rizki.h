@@ -9,7 +9,7 @@
 
 void Hitungan_Lain(){
 	int pilihan;
-	printf("Hitungan Lain : \n1. Matriks\n2. Koversi Suhu\n3. Statistika\n");
+	printf("Hitungan Lain : \n1. Matriks\n2. Koversi Suhu\n3. Statistika\n4.Konversi Waktu\n");
 	printf("Pilihan :");
 	scanf("%d",&pilihan);
 	switch(pilihan){
@@ -24,6 +24,10 @@ void Hitungan_Lain(){
 		case 3 :
 			system("cls");
 			statistika();
+			break;
+		case 4 :
+			system("cls");
+			konversi_waktu();
 			break;
 		default :
 			system("cls");
