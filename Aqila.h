@@ -50,9 +50,8 @@ double reamur_fahrenheit(double reamur) {
   return reamur * 9.0 / 4.0 + 32;
 }
 
-int main() {
-  double suhu, hasil;
-  int pilihan;
+void menu_suhu(int pilihan, double suhu) {
+  double hasil;
 
   printf("Pilih satuan suhu asal:\n");
   printf("1. Celsius\n");
@@ -167,6 +166,5 @@ int main() {
   default:
     printf("Pilihan tidak valid\n");
   }
-  return 0;
 }
 #endif
