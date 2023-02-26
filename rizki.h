@@ -7,17 +7,41 @@
 #define MAX_ROW 10
 #define MAX_COL 10
 
-void inputMatrix(int mat[][MAX_COL], int row, int col){
+void Hitungan_Lain(){
+	int pilihan;
+	printf("Hitungan Lain : \n1. Matriks\n2. Koversi Suhu\n3. Statistika\n");
+	printf("Pilihan :");
+	scanf("%d",&pilihan);
+	switch(pilihan){
+		case 1 :
+			system("cls");
+			menu_matriks();
+			break;
+		case 2 :
+			system("cls");
+			konversi_suhu();
+			break;
+		case 3 :
+			system("cls");
+			statistika();
+			break;
+		default :
+			system("cls");
+			main();
+	}
+}
+
+void inputMatrix(double mat[][MAX_COL], int row, int col){
     int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < col; j++){
             printf("Masukkan elemen matriks baris ke-%d kolom ke-%d: ", i + 1, j + 1);
-            scanf("%d", &mat[i][j]);
+            scanf("%lf", &mat[i][j]);
         }
     }
 }
 
-void addMatrix(int mat1[][MAX_COL], int mat2[][MAX_COL], int result[][MAX_COL], int row, int col){
+void addMatrix(double mat1[][MAX_COL], double mat2[][MAX_COL], double result[][MAX_COL], int row, int col){
     int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < col; j++){
@@ -26,7 +50,7 @@ void addMatrix(int mat1[][MAX_COL], int mat2[][MAX_COL], int result[][MAX_COL], 
     }
 }
 
-void subtractMatrix(int mat1[][MAX_COL], int mat2[][MAX_COL], int result[][MAX_COL], int row, int col){
+void subtractMatrix(double mat1[][MAX_COL], double mat2[][MAX_COL], double result[][MAX_COL], int row, int col){
     int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < col; j++){
@@ -35,7 +59,7 @@ void subtractMatrix(int mat1[][MAX_COL], int mat2[][MAX_COL], int result[][MAX_C
     }
 }
 
-void multiplyMatrix(int mat1[][MAX_COL], int mat2[][MAX_COL], int result[][MAX_COL], int row1, int col1, int col2){
+void multiplyMatrix(double mat1[][MAX_COL], double mat2[][MAX_COL], double result[][MAX_COL], int row1, int col1, int col2){
     int i, j, k;
     for (i = 0; i < row1; i++){
         for (j = 0; j < col2; j++){
@@ -47,38 +71,38 @@ void multiplyMatrix(int mat1[][MAX_COL], int mat2[][MAX_COL], int result[][MAX_C
     }
 }
 
-void outputMatrix(int mat[][MAX_COL], int row, int col){
+void outputMatrix(double mat[][MAX_COL], int row, int col){
     int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < col; j++){
-            printf("%d\t", mat[i][j]);
+            printf("%g\t", mat[i][j]);
         }
         printf("\n");
     }
 }
 
-void matrixPertama(int mat[][MAX_COL], int row, int col){
+void matrixPertama(double mat[][MAX_COL], int row, int col){
 	int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < col; j++){
-            printf("%d\t", mat[i][j]);
+            printf("%g\t", mat[i][j]);
         }
         printf("\n");
     }
 }
 
-void matrixKedua(int mat[][MAX_COL], int row, int col){
+void matrixKedua(double mat[][MAX_COL], int row, int col){
 	int i, j;
     for (i = 0; i < row; i++){
         for (j = 0; j < col; j++){
-            printf("%d\t", mat[i][j]);
+            printf("%g\t", mat[i][j]);
         }
         printf("\n");
     }
 }
 
 void menu_matriks(){
-    int mat1[MAX_ROW][MAX_COL], mat2[MAX_ROW][MAX_COL], result[MAX_ROW][MAX_COL];
+    double mat1[MAX_ROW][MAX_COL], mat2[MAX_ROW][MAX_COL], result[MAX_ROW][MAX_COL];
     int row1, col1, row2, col2, choice;
 
     do{
