@@ -26,16 +26,18 @@ double pembagian(double a, double b)
     return hasil = a / b;
 }
 
-//void inputAngka(){
-//	
-//    int a, b, hasil;
-//    
-//    printf("Masukan angka yang ingin dijumlahkan : ");
-//    scanf("%d", &a);
-//    printf("Masukan angka yang ingin dijumlahkan : ");
-//    scanf("%d", &b);
-//    hasil = penjumlahan (a, b);
-//	printf("Hasil Penjumlahan : %d", hasil);
-//}
+int faktorial(int angka){
+	double result = 1;
+	if(angka >= 0){
+		int i;
+		for (i = 2; i <= angka; i++) {
+	        result *= i;
+	    }
+		return result;	
+	}else{
+		printf("Anda memasukkan angka negatif!");
+		return -1;
+	}
+}
 
 #endif
