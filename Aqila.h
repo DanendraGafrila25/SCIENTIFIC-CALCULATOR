@@ -2,6 +2,8 @@
 #define Aqila_h
 #include <stdio.h>
 
+
+//konversi suhu
 double celsius_kelvin(double celsius) {
   return celsius + 273.15;
 }
@@ -164,6 +166,90 @@ void konversi_suhu() {
     default:
       printf("Pilihan tidak valid\n");
     }
+    break;
+  default:
+    printf("Pilihan tidak valid\n");
+  }
+
+//konversi waktu
+double detik_ke_jam(int detik) {
+  double jam = (double) detik / 3600;
+  return jam;
+}
+
+double detik_ke_menit(int detik) {
+  double minute = (double) detik / 60;
+  return minute;
+}
+
+double jam_ke_detik(int jam) {
+  double detik = jam * 3600;
+  return detik;
+}
+
+int jam_ke_menit(int jam) {
+  int minute = jam * 60;
+  return minute;
+}
+
+double menit_ke_jam(int menit) {
+  double hour = (double) menit / 60;
+  return hour;
+}
+
+int menit_ke_detik(int menit) {
+  int second = menit * 60;
+  return second;
+}
+
+void konversi_waktu() {
+  int pilihan, hour, menit, second;
+  printf("1. Konversi detik ke jam\n");
+  printf("2. Konversi detik ke menit\n");
+  printf("3. Konversi jam ke detik\n");
+  printf("4. Konversi jam ke menit\n");
+  printf("5. Konversi menit ke jam\n");
+  printf("6. Konversi menit ke detik\n");
+  printf("Masukkan pilihan: ");
+  scanf("%d", & pilihan);
+
+  switch (pilihan) {
+  case 1:
+    printf("Masukkan detik: ");
+    scanf("%d", & second);
+    double jam = detik_ke_jam(second);
+    printf("%d detik adalah %0.2f jam\n", second, jam);
+    break;
+  case 2:
+    printf("Masukkan detik: ");
+    scanf("%d", & second);
+    double minute = detik_ke_menit(second);
+    printf("%d detik adalah %0.2f menit", second, minute);
+    break;
+  case 3:
+    printf("Masukkan jam: ");
+    scanf("%d", & hour);
+    double detik = jam_ke_detik(hour);
+    printf("%d jam adalah %g detik", hour, detik);
+    break;
+  case 4:
+    printf("Masukkan jam: ");
+    scanf("%d", & hour);
+    int menit = jam_ke_menit(hour);
+    printf("%d jam adalah %d menit", hour, menit);
+    break;
+  case 5:
+    printf("Masukkan menit: ");
+    scanf("%d", & menit);
+    double hour = menit_ke_jam(menit);
+    printf("%d menit adalah %0.2f jam", menit, hour);
+    break;
+
+  case 6:
+    printf("Masukkan menit: ");
+    scanf("%d", & menit);
+    int second = menit_ke_detik(menit);
+    printf("%d menit adalah %d detik", menit, second);
     break;
   default:
     printf("Pilihan tidak valid\n");
