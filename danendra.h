@@ -19,25 +19,6 @@ int prioritas(char operator) {
         exit(1);
 }
 
-double operasi_trigonometri(double sudut, char op[]) {
-	sudut = (sudut * M_PI)/180;
-    if (strcmp(op, "sec(") == 0) {
-		return 1.0 / cos(sudut);
-    } else if (strcmp(op, "csc(") == 0) {
-		return 1.0 / sin(sudut);
-    } else if (strcmp(op, "cot(") == 0) {
-		return 1.0 / tan(sudut);
-    } else if (strcmp(op, "sin(") == 0) {
-    	return sin(sudut);
-    } else if (strcmp(op, "cos(") == 0) {
-        return cos(sudut);
-    } else if (strcmp(op, "tan(") == 0) {
-        return tan(sudut);
-    } else {
-        return 0;
-    }
-}
-
 double simbol_operasi(double num1, double num2, char operator) {
     switch (operator) {
     	case 'C' :
