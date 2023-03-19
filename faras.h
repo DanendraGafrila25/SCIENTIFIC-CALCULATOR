@@ -1,6 +1,5 @@
-#ifndef penjumlahan_h
-#define penjumlahan_h
-#include <stdio.h>
+#ifndef faras_h
+#define faras_h
 
 double penjumlahan(double a, double b){
     return a + b;
@@ -11,25 +10,18 @@ double pengurangan(double a, double b){
 }
 
 double perkalian(double a, double b){
-    return a * b;
+	int i;
+	double hasil = 0;
+	
+	for(i = 1; i <= b; i++){
+		hasil = penjumlahan(hasil, a);
+	}
+	
+    return hasil;
 }
 
 double pembagian(double a, double b){
     return a / b;
-}
-
-int faktorial(int angka){
-	double result = 1;
-	if(angka >= 0){
-		int i;
-		for (i = 2; i <= angka; i++) {
-	        result *= i;
-	    }
-		return result;	
-	}else{
-		printf("Anda memasukkan angka negatif!");
-		return -1;
-	}
 }
 
 #endif

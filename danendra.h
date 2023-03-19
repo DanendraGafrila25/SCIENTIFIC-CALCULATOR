@@ -1,28 +1,16 @@
 #ifndef danendra_h
 #define danendra_h
 
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <ctype.h>
 #include "Aqila.h"
 #include "faras.h"
 #include "linda.h"
-
-// fungsi untuk menghitung kombinasi
-int combination(int n, int r) {
-    int numerator = faktorial(n);
-    int denominator = faktorial(r) * faktorial(n-r);
-    int result = numerator / denominator;
-    return result;
-}
 
 int prioritas(char operator) {
     if (operator == '+' || operator == '-')
         return 1;
     else if (operator == '*' || operator == '/')
         return 2;
-    else if (operator == '^' || operator == 'L' || operator == '!' || operator == 'V' || operator == 'C')
+    else if (operator == '^' || operator == 'L' || operator == '!' || operator == 'V' || operator == 'C' || operator == 'P')
         return 3;
     else if (operator == '(' || operator == ')')
         return 0; 
@@ -54,12 +42,14 @@ double simbol_operasi(double num1, double num2, char operator) {
     switch (operator) {
     	case 'C' :
     		return combination((int)num1,(int)num2);  
+    	case 'P' :
+    		return permutation((int)num1, (int)num2);
     	case 'V' :
-    		return  akar(num1,num2);
+    		return akar(num1,num2);
     	case 'L' :
-    		return  logaritma(num1);
+    		return logaritma(num1);
     	case '!' :
-    		return faktorial(num1);
+    		return faktorial((int)num1);
         case '^':
             return eksponen(num1, num2);
         case '*':
@@ -77,14 +67,16 @@ double simbol_operasi(double num1, double num2, char operator) {
 }
 
 void Operasi_hitung(){
+	double hasil = 0;
+	
 	for(;;){
+		printf("%g\n", hasil);
     	char ekspresi[100];
 		double num2, num1, operand_stack[100];
 	    int operand_top = -1;
 	    char operator_stack[100], operator;
 	    int operator_top = -1;
 	    int i;
-    	system("cls");
     	printf("ekspresi : ");
 	    scanf("%s", ekspresi);
 	    for (i = 0; ekspresi[i]; i++) {
@@ -151,11 +143,10 @@ void Operasi_hitung(){
 		    operator = operator_stack[operator_top--];
 		    operand_stack[++operand_top] = simbol_operasi(num1, num2, operator);
 		}
-		
+		hasil += operand_stack[0];
 		printf("Result: %g\n", operand_stack[0]);
 		system("pause");
 		system("cls");
-		main();
 	}
 }
 
