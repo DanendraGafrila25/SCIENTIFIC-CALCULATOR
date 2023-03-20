@@ -5,8 +5,14 @@ int compare(const void *a, const void *b) {
     return (*(float*)a - *(float*)b);
 }
 
-double eksponen(double a,double b){
-   return pow(a,b);
+int eksponen(int base, int exponent) {
+  int result = 1;
+  
+  for (int i = 1; i <= exponent; i++) {
+    result *= base;
+  }
+
+  return result;
 }
 
 double akar(double x, double y){
