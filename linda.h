@@ -5,7 +5,6 @@ int compare(const void *a, const void *b) {
     return (*(float*)a - *(float*)b);
 }
 
-
 double eksponen(double base, double exponent) {
 double hasil = 1.0;
 int i;
@@ -14,7 +13,7 @@ for ( i = 1; i <= exponent; i++) {
 hasil *= base;
 }
 return hasil;
-	}else{
+	} else{
 		return hasil = pow(base,exponent);
 	}
 }
@@ -31,7 +30,6 @@ double akar(double x, double y) {
         }
         hasil = akar_baru;
     }
-    
     return hasil;
 }
 
