@@ -3,12 +3,16 @@
 #include <stdio.h>
 
 //logaritma
-double logaritma(double x) {
-  return log10(x);
+  double logaritma(double x, double basis) {
+    double hasil = 0.0;
+
+	hasil = log(x)/log(basis);
+    return hasil;
 }
 
+
 //trigonometri
-double operasi_trigonometri(double sudut, char op[]) {
+double simbol_operasi_trigonometri(double sudut, char op[]) {
 	sudut = (sudut * M_PI)/180;
     if (strcmp(op, "sec(") == 0) {
 		return 1.0 / cos(sudut);
