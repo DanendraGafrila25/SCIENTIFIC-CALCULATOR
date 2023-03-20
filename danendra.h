@@ -28,8 +28,8 @@ double simbol_operasi(double num1, double num2, char operator) {
     		return permutation((int)num1, (int)num2);
     	case 'V' :
     		return akar(num1,num2);
-    	case 'L' :
-    		return logaritma(num2,num1);
+    	case 'e' :
+    		return M_E;
     	case '!' :
     		return faktorial((int)num1);
         case '^':
@@ -94,9 +94,12 @@ void Operasi_hitung(){
 				        // menyimpan operator trigonometri
 				        trigono[j++] = ekspresi[i++];
 				        trigono[6] = '\0';
+					}
 				}
-				    }
-					}else if (ekspresi[i] == 'l'){
+				operand_stack[++operand_top] = atof(number);
+				bil = operand_stack[operand_top];
+				operand_stack[operand_top]=simbol_operasi_trigonometri(bil, trigono);
+			}else if (ekspresi[i] == 'l'){
 	        	char log[4];
 	        	int j=0;
 	        	char temp[1], temp2[1];
@@ -122,16 +125,18 @@ void Operasi_hitung(){
 						if(num2 <= 0) {
 				            printf("Invalid expression");
 				        }
-						else if(!isdigit(temp[0])){
+						else if(!isdigit(temp[0]) && !(temp[0] == 'e')){
 							operand_stack[++operand_top]=logaritma(num2, 10);
-						}else{
+						}else if(temp[0] == 'e'){
+							operand_stack[++operand_top]=logaritma(num2, M_E);
+						}
+						else{
 							num1 = operand_stack[operand_top--];
 							operand_stack[++operand_top]=logaritma(num2, num1);
 						}
-					
 					}	
 				}
-			}  else {
+			}else {
 	            while (operator_top >= 0 && prioritas(operator_stack[operator_top]) >= prioritas(ekspresi[i])) {
 	                num2 = operand_stack[operand_top--];
 	                num1 = operand_stack[operand_top--];
