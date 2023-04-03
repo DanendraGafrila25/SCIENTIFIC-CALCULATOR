@@ -17,7 +17,6 @@ int prioritas(char operator) {
         return 0; 
     else
         return -1;
-        exit(1);
 }
 
 double simbol_operasi(double num1, double num2, char operator) {
@@ -49,10 +48,11 @@ double simbol_operasi(double num1, double num2, char operator) {
 }
 
 void Operasi_hitung(){
-	    double result = 0;
+	double result = 0;
 	for(;;){
     	char ekspresi[100];
 		double num2, num1, operand_stack[100];
+		operand_stack[0] = 0;
 	    int operand_top = -1;
 	    char operator_stack[100], operator;
 	    int operator_top = -1;
@@ -81,7 +81,28 @@ void Operasi_hitung(){
 	                operand_stack[++operand_top] = simbol_operasi(num1, num2, operator);
 	            }
 	            operator_top--;
-            } else if (ekspresi[i] == 's' || ekspresi[i] == 'c' || ekspresi[i] == 't'){
+	        
+            }else if(ekspresi[i]=='!'){
+				int j = i - 1;
+				int k;
+				char number[100];
+				double bil;
+				int result;
+				int index = 0;
+			    while (j >= 0 && isdigit(ekspresi[j])) {
+			        j--;
+			    }
+			    for (k = j + 1; k < i; k++) {
+			    	number[index] = ekspresi[k];
+			        index++;
+			    }
+			
+			    operand_stack[++operand_top] = atof(number);
+				bil = operand_stack[operand_top];
+				result = faktorial(bil);
+				operand_stack[--operand_top]=(double)result;
+				
+			}else if (ekspresi[i] == 's' || ekspresi[i] == 'c' || ekspresi[i] == 't'){
             	char trigono[6];
             	int j=0;
             	char number[100];
@@ -96,6 +117,7 @@ void Operasi_hitung(){
 				        trigono[6] = '\0';
 					}
 				}
+				number[number_top] = '\0';
 				operand_stack[++operand_top] = atof(number);
 				bil = operand_stack[operand_top];
 				operand_stack[operand_top]=simbol_operasi_trigonometri(bil, trigono);
@@ -145,6 +167,7 @@ void Operasi_hitung(){
 	            }
 	            operator_stack[++operator_top] = ekspresi[i];
 			}
+
 		}
 		while (operator_top >= 0) {
 		    num2 = operand_stack[operand_top--];
@@ -152,12 +175,12 @@ void Operasi_hitung(){
 		    operator = operator_stack[operator_top--];
 		    operand_stack[++operand_top] = simbol_operasi(num1, num2, operator);
 		}
+
 		result = result + operand_stack[0];
 		printf("= %g\n",operand_stack[0] );
 		system("pause");
 		system("cls");
 	}
 }
-
 
 #endif
