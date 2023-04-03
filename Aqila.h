@@ -13,6 +13,9 @@
 
 //trigonometri
 double simbol_operasi_trigonometri(double sudut, char op[]) {
+	if (strcmp(op, "cos(") == 0 && sudut == 90){
+		return 0;
+	}
 	sudut = (sudut * M_PI)/180;
     if (strcmp(op, "sec(") == 0) {
 		return 1.0 / cos(sudut);
@@ -23,7 +26,7 @@ double simbol_operasi_trigonometri(double sudut, char op[]) {
     } else if (strcmp(op, "sin(") == 0) {
     	return sin(sudut);
     } else if (strcmp(op, "cos(") == 0) {
-        return cos(sudut);
+		return cos(sudut);  
     } else if (strcmp(op, "tan(") == 0) {
         return tan(sudut);
     } else {
