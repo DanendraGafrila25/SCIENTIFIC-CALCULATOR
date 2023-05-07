@@ -2,12 +2,25 @@
 #define Aqila_h
 #include <stdio.h>
 
-//logaritma
-  double logaritma(double x, double basis) {
-    double hasil = 0.0;
+double logaritma(double num1, double num2) {
+    double hasil = num2;
+    double sisa;
 
-	hasil = log(x)/log(basis);
-    return hasil;
+    if (num2 <= 0 || num1 <= 0) {
+        printf("Invalid input\n");
+        return 0.0/0.0;
+    } else if (num1 == num2) {
+        return 1;
+    } else {
+        while (hasil >= num1) {
+                hasil /= num1;
+                hasil += 1;
+        }
+        if(hasil != 1){
+        	hasil+=hasil/num1;
+		}
+    }
+
 }
 
 
