@@ -34,6 +34,7 @@ node Last;
 }Queue;
 
 
+<<<<<<< HEAD
 void InfixToPostfix(infotype* input, infotype postfix[]);
 int derajatOperator(infotype oper);
 int isOperator(infotype oper);
@@ -51,9 +52,14 @@ address CreateNodeOperand(float input);
 address CreateNodeOperator(char input);
 double kalkulasi(address P);
 float DequeOperand(Queue *A);
+=======
+>>>>>>> c32adeca7a6f8ae709672a37f03c9eebbae5aa32
 
 
 #endif
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c32adeca7a6f8ae709672a37f03c9eebbae5aa32

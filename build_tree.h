@@ -215,6 +215,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				EnqueOperator(&*Z,PopStack(&*X),&P);
 			}
 			PushStack(&*X,token,&P);
+<<<<<<< HEAD
 			}else if(token == 'l'){
 		   	char log[10];
 		    char Num[100];
@@ -236,6 +237,8 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 		        hasil = logaritma(angka, a, log);
 		        EnqueOperand(&*Z, hasil, &P);	
 			}
+=======
+>>>>>>> c32adeca7a6f8ae709672a37f03c9eebbae5aa32
 		}else if(token==')'){
 			c=X->Head->oprtr;
 			while(c!='('){
@@ -325,6 +328,7 @@ double kalkulasi(address P){
 	return P->operand;
 }
 
+<<<<<<< HEAD
 float DequeOperand(Queue *A){
 	float q;
 	node First,Last,Throw;
@@ -354,5 +358,7 @@ float DequeOperand(Queue *A){
 		
 	}
 }
+=======
+>>>>>>> c32adeca7a6f8ae709672a37f03c9eebbae5aa32
 
 #endif
