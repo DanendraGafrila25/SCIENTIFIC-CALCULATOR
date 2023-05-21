@@ -24,7 +24,8 @@ int main(){
 	Z.First=NULL;
 	Z.Last=NULL;
 	X.Head=NULL;
-	printf("Masukkan Ekspresi:");
+	PrintFromFile("asset.txt");
+	printf("\n\nMasukkan Ekspresi:");
 	scanf("%s",&input);fflush(stdin);
 	convertPostfix(&Z,&X,input);
 	P=Create_Tree(Z);

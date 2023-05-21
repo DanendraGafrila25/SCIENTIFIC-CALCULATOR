@@ -423,28 +423,5 @@ float DequeOperand(Queue * A) {
   }
 }
 
-double simbol_operasi_trigonometri(double sudut, char operator[]) {
-  if (strcmp(operator, "sin(") == 0) {
-    return operasiSinus(sudut);
-  } else if (strcmp(operator, "cos(") == 0) {
-    return operasiCosinus(sudut);
-  } else if (strcmp(operator, "tan(") == 0) {
-    return operasiTangen(sudut);
-  } else if (strcmp(operator, "asin(") == 0) {
-    return operasiAsin(sudut);
-  } else if (strcmp(operator, "acos(") == 0) {
-    return operasiAcos(sudut);
-  } else if (strcmp(operator, "atan(") == 0) {
-    return operasiAtan(sudut);
-  } else if (strcmp(operator, "csc(") == 0) {
-    return operasiCosecan(sudut);
-  } else if (strcmp(operator, "sec(") == 0) {
-    return operasiSecan(sudut);
-  } else if (strcmp(operator, "cot(") == 0) {
-    return operasiCotangen(sudut);
-  } else {
-    exit(1);
-  }
-}
 
 #endif
