@@ -1,6 +1,5 @@
 #ifndef Aqila_h
 #define Aqila_h
-#include "linda.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
