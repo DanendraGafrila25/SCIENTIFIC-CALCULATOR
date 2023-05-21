@@ -12,7 +12,7 @@ double logaritma(float num1, float num2, char *input) {
 			printf("Invalid input\n");
 			return 0.0 / 0.0;
 		} else {
-			return log(num2)/log(num1);hasil;
+			return log(num2)/log(num1);
 		}
 	} else if (strcmp(input, "ln(") == 0) {
 		if (num2 <= 0) {
