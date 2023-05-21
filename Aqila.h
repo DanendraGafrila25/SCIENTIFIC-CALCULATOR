@@ -2,14 +2,20 @@
 #define Aqila_h
 #include <stdio.h>
 
-//logaritma
-  double logaritma(double x, double basis) {
-    double hasil = 0.0;
-
-	hasil = log(x)/log(basis);
-    return hasil;
+// logaritma
+double logaritma(double num1, double num2) {
+    if (num2 <= 0 || num1 <= 0) {
+        printf("Invalid input\n");
+        return 0.0 / 0.0;  // Mengembalikan NaN (Not a Number) untuk input yang tidak valid
+    } else {
+        double hasil = 0.0;
+        while (num2 >= num1) {
+            num2 /= num1;
+            hasil += 1.0;
+        }
+        return hasil;
+    }
 }
-
 
 //trigonometri
 double simbol_operasi_trigonometri(double sudut, char op[]) {

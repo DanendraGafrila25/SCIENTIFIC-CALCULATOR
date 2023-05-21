@@ -14,7 +14,7 @@ double perkalian(double a, double b){
 }
 
 double pembagian(double a, double b){
-	return hasil = a/b;
+	return  a/b;
 }
 
 #endif
