@@ -1,5 +1,6 @@
 #ifndef rizki_h
 #define rizki_h
+#include <windows.h>
 
 //trigonometri
 double simbol_operasi_trigonometri(double sudut, char op[]) {
@@ -46,6 +47,11 @@ double simbol_operasi_trigonometri(double sudut, char op[]) {
 	}else{
         return 0;
 	}
+}
+
+void gotoxy(int x, int y) {
+    COORD coord = {x, y};
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
 int permutation(int n, int r) {
