@@ -52,47 +52,6 @@ float logaritmaProses(float num1, float num2, char *input) {
 	}
 	
 	
-/*float logNatural(float num){
-	if (num<=0){
-		return 0.0 / 0.0;
-	}
-	float hasil = 0.0;
-	float temp = (num-1)/num;
-	float i = 1;
-	
-	if(temp<0)
-	{
-		temp = -(temp);
-	}
-	while (temp> 0.0000000001){
-		hasil = hasil + temp;
-		i++;
-		temp = eksponen((num-1)/num, i) /i;
-		}
-		return hasil;
-	}*/
-//trigonometri
-// double simbol_operasi_trigonometri(double sudut, char op[]) {
-// 	if (strcmp(op, "cos(") == 0 && sudut == 90){
-// 		return 0;
-// 	}
-// 	sudut = (sudut * M_PI)/180;
-//     if (strcmp(op, "sec(") == 0) {
-// 		return 1.0 / cos(sudut);
-//     } else if (strcmp(op, "csc(") == 0) {
-// 		return 1.0 / sin(sudut);
-//     } else if (strcmp(op, "cot(") == 0) {
-// 		return 1.0 / tan(sudut);
-//     } else if (strcmp(op, "sin(") == 0) {
-//     	return sin(sudut);
-//     } else if (strcmp(op, "cos(") == 0) {
-// 		return cos(sudut);  
-//     } else if (strcmp(op, "tan(") == 0) {
-//         return tan(sudut);
-//     } else {
-//         return 0;
-//     }
-// }
 
 //konversi suhu
 double celsius_kelvin(double celsius) {
