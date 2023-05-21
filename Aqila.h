@@ -49,3 +49,4 @@ float logaritmaProses(float num1, float num2, char *input) {
 	    }
 		return 2 * hasil;
 	}
+#endif
