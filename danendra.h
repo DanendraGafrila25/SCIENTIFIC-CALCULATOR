@@ -5,46 +5,28 @@
 #include "faras.h"
 #include "linda.h"
 #include "rizki.h"
+#include "tree.h"
 
-int prioritas(char operator) {
-    if (operator == '+' || operator == '-')
-        return 1;
-    else if (operator == '*' || operator == '/')
-        return 2;
-    else if (operator == '^' || operator == 'L' || operator == '!' || operator == 'V' || operator == 'C' || operator == 'P')
-        return 3;
-    else if (operator == '(' || operator == ')')
-        return 0; 
-    else
-        return -1;
+int derajatOperator(infotype oper) {
+  if (oper == '+' || oper == '-') {
+    return 1;
+  } else if (oper == '*' || oper == '/') {
+    return 2;
+  } else if (oper == '^' || oper == 'v') {
+    return 3;
+  } else if (oper == '(' || oper == ')') {
+    return 0;
+  } else {
+    printf("Error, Operator Tidak Diketahui: %c", oper);
+    exit(1);
+  }
 }
 
-double simbol_operasi(double num1, double num2, char operator) {
-    switch (operator) {
-    	case 'C' :
-    		return combination((int)num1,(int)num2);  
-    	case 'P' :
-    		return permutation((int)num1, (int)num2);
-    	case 'V' :
-    		return akar(num1,num2);
-    	case 'e' :
-    		return M_E;
-    	case '!' :
-    		return faktorial((int)num1);
-        case '^':
-            return eksponen(num1, num2);
-        case '*':
-            return perkalian(num1,num2);
-        case '/':
-            return pembagian(num1,num2);
-        case '+':
-            return penjumlahan(num1, num2);
-        case '-':
-            return pengurangan(num1, num2);
-        default:
-            printf("Invalid operator: %c", operator);
-            return 0;
-    }
+int isOperator(infotype oper) {
+  if (oper == '+' || oper == '-' || oper == '*' || oper == '/' || oper == '^' || oper == 'v') {
+    return 1;
+  }
+  return 0;
 }
 
 /*void Operasi_hitung(){
