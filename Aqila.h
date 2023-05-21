@@ -1,28 +1,56 @@
 #ifndef Aqila_h
 #define Aqila_h
+#include "linda.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
 
+float logaritmaProses(float num1, float num2, char *input);
+float logaritma(float num1, float num2);
+float logNatural(float num);
+
 //logaritma
-double logaritma(float num1, float num2, char *input) {
-	float hasil = 0.0;
-	if (strcmp(input, "log(") == 0) {
-		if (num2 <= 0 || num1 <= 0) {
-			printf("Invalid input\n");
-			return 0.0 / 0.0;
-		} else {
-			return log(num2)/log(num1);
-		}
-	} else if (strcmp(input, "ln(") == 0) {
-		if (num2 <= 0) {
-			printf("Invalid input\n");
-			return 0.0 / 0.0;
-		} else {
-			return log(num2);
-		}
-	}
+float logaritmaProses(float num1, float num2, char *input) {
+    float hasil = 0.0;
+    
+    if (strcmp(input, "log(") == 0) {
+        if (num2 <= 0 || num1 <= 0) {
+            printf("Invalid input\n");
+            return 0.0 / 0.0;
+        } else {
+        	hasil = logNatural(num2)/logNatural(num1);
+            return hasil;
+        }
+    } else if (strcmp(input, "ln(") == 0) {
+        if (num2 <= 0) {
+            printf("Invalid input\n");
+            return 0.0 / 0.0;
+        } else {
+        	hasil = logNatural(num2); // Menggunakan logaritma natural dengan basis e
+            return hasil;
+        }
+    }
 }
+
+float logNatural(float num){
+	if (num<=0){
+		return 0.0 / 0.0;
+	}
+	float hasil = 0.0;
+	float temp = (num-1)/num;
+	float i = 1;
+	
+	if(temp<0)
+	{
+		temp = -(temp);
+	}
+	while (temp> 0.0000000001){
+		hasil = hasil + temp;
+		i++;
+		temp = eksponen((num-1)/num, i) /i;
+		}
+		return hasil;
+	}
 
 
 //trigonometri

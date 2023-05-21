@@ -233,7 +233,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				}
 				Num[j]='\0';
 				angka=strtof(Num, NULL);
-				hasil=logaritma(a,angka,log);
+				hasil=logaritmaProses(a,angka,log);
 				EnqueOperand(&*Z, hasil,&P);	
 			}else{
 				while(input[i]!=')'){
@@ -246,7 +246,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				}
 				Num[j]='\0';
 				angka=strtof(Num, NULL);
-				hasil=logaritma(10,angka,log);
+				hasil=logaritmaProses(10,angka,log);
 				EnqueOperand(&*Z, hasil,&P);	
 			}
 		}else if(token==')'){
