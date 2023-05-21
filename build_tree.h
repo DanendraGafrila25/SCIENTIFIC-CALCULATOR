@@ -368,50 +368,26 @@ float DequeOperand(Queue *A){
 	}
 }
 
-// double simbol_operasi_trigonometri(double sudut, char op[]){
-// 	if(strcmp(operator,"sin(")==0){
-// 		return operasiSinus(angka);
-// 	}
-// 	else if(strcmp(operator,"cos(")==0){
-// 		return operasiCosinus(sudut);
-// 	}else if(strcmp(operator,"tan(")==0){
-// 		return operasiTangen(sudut);
-// 	}else if(strcmp(operator,"asin(")==0){
-// 		return operasiAsin(sudut);
-// 	}else if(strcmp(operator,"acos(")==0){
-// 		return operasiAcos(sudut);
-// 	}else if(strcmp(operator,"atan(")==0){
-// 		return operasiAtan(sudut);
-// 	}else if(strcmp(operator,"csc(")==0){
-// 		return operasiCosecan(sudut);
-// 	}else if(strcmp(operator,"sec(")==0){
-// 		return operasiSecan(sudut);
-// 	}else if(strcmp(operator,"cot(")==0){
-// 		return operasiCotangen(sudut);
-// 	}else {
-// 		return 0;
-// 	}
-// }
-double prosesPerhitunganTrigonometri(double angka, char operator[]){
+double simbol_operasi_trigonometri(double sudut, char operator[]){
 	if(strcmp(operator,"sin(")==0){
-		return operasiSinus(angka);
+		return operasiSinus(sudut);
 	}
 	else if(strcmp(operator,"cos(")==0){
-		return operasiCosinus(angka);
+		return operasiCosinus(sudut);
 	}else if(strcmp(operator,"tan(")==0){
-		return operasiTangen(angka);
+		return operasiTangen(sudut);
 	}else if(strcmp(operator,"asin(")==0){
-		return operasiAsin(angka);
+		return operasiAsin(sudut);
 	}else if(strcmp(operator,"acos(")==0){
-		return operasiAcos(angka);
+		return operasiAcos(sudut);
 	}else if(strcmp(operator,"atan(")==0){
-		return operasiAtan(angka);
+		return operasiAtan(sudut);
 	}else if(strcmp(operator,"csc(")==0){
-		return operasiCosecan(angka);
+		return operasiCosecan(sudut);
 	}else if(strcmp(operator,"sec(")==0){
-		return operasiSecan(angka);
+		return operasiSecan(sudut);
 	}else if(strcmp(operator,"cot(")==0){
-		return operasiCotangen(angka);
+		return operasiCotangen(sudut);
 	}
 	else{
 		if(strcmp(operator,"SIN")==0||strcmp(operator,"SIN(")==0||strcmp(operator,"sin")==0){
