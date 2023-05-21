@@ -37,77 +37,79 @@ int isOperator(infotype oper){
 address CreateNode(infotype data){
 	address P;
 	
-	P = (address) malloc (sizeof (Tree));
-	Data(P)=data;
-	Rson(P)=Nil;
-	Lson(P)=Nil;
+	P = (address) malloc (sizeof (Tree)); // Mengalokasikan memori untuk node baru dalam pohon (tree)
+	Data(P)=data; // Menyimpan data pada node baru
+	Rson(P)=Nil; // Menginisialisasi pointer anak kanan dengan nilai Null (kosong)
+	Lson(P)=Nil; // Menginisialisasi pointer anak kiri dengan nilai Null (kosong)
 	
-	return P;
+	return P; // Mengembalikan alamat node yang baru dibuat
 }
 
 address BuildTree(infotype postfix[]){
 	address P;
-	address stack[50];
-	int i, len, top=-1;
-	infotype c;
+	address stack[50]; // Array untuk menyimpan node dalam stack
+	int i, len, top = -1; // Variabel i untuk iterasi, len untuk panjang postfix, top sebagai indeks stack
+	infotype c; // Variabel untuk menyimpan karakter saat ini dari postfix
 	
-	len=strlen(postfix);
+	len = strlen(postfix); // Menghitung panjang postfix
 	
-	for(i=0;i<len;i++){
-		c=postfix[i];
+	for(i = 0; i < len; i++){
+		c = postfix[i]; // Mengambil karakter saat ini dari postfix
 		if(isdigit(c)){
-			P=CreateNode(c);
+			P = CreateNode(c); // Jika karakter adalah digit, buat node baru dengan data c
 		} else{
-			P=CreateNode(c);
-			Rson(P)=stack[top--];
-			Lson(P)=stack[top--];
+			P = CreateNode(c); // Jika karakter bukan digit, buat node baru dengan data c
+			Rson(P) = stack[top--]; // Ambil node dari stack sebagai anak kanan
+			Lson(P) = stack[top--]; // Ambil node dari stack sebagai anak kiri
 		}
-		stack[++top]=P;
+		stack[++top] = P; // Tambahkan node ke stack
 	}
-	return(stack[0]);
+	return stack[0]; // Mengembalikan akar pohon (root)
 }
+
 
 void PostOrder(address P){
-	
-	if(P!=Nil){
-		PostOrder(Lson(P));
-		PostOrder(Rson(P));
-		if(P->isOperator==1){
-			printf("%c ", P->data);
+	if(P != Nil){
+		PostOrder(Lson(P)); // Rekursi pada anak kiri
+		PostOrder(Rson(P)); // Rekursi pada anak kanan
+		if(P->isOperator == 1){
+			printf("%c ", P->data); // Jika node adalah operator, cetak karakter operator
 		}else{
-			printf("%g ",P->operand);
+			printf("%g ", P->operand); // Jika node adalah operand, cetak nilai operand
 		}
 	}
 }
 
-void PushStack(Stack *First,char item,node *P){
-	*P = (node) malloc (sizeof (ElmtList));
-	if(P==NULL){
+
+void PushStack(Stack *First, char item, node *P){
+	*P = (node) malloc (sizeof (ElmtList)); // Mengalokasikan memori untuk node baru
+	if(P == NULL){
 		printf("Gagal Alokasi");
 	}else{
-
-		(*P)->oprtr=item;
-		(*P)->isoperator=1;
-		(*P)->next=NULL;
-		if(First->Head==NULL){
-			(*First).Head=*P;
-			(*First).Head->next=NULL;	
+		(*P)->oprtr = item; // Menyimpan nilai operator pada node
+		(*P)->isoperator = 1; // Menandai node sebagai operator
+		(*P)->next = NULL;
+		
+		if(First->Head == NULL){
+			(*First).Head = *P; // Jika stack kosong, node baru menjadi Head
+			(*First).Head->next = NULL;
 		}else{
-			(*P)->next=First->Head;
-			First->Head=*P;
+			(*P)->next = First->Head; // Menyambungkan node baru dengan Head yang lama
+			First->Head = *P; // Node baru menjadi Head yang baru
 		}
-	
-	
+	}
 }
-}
+
 
 char PopStack(Stack *First){
 	node P;
-	P=First->Head;
-	First->Head=P->next;
-	return P->oprtr;
-	free(P);
+	P = First->Head; // Mengambil node Head saat ini
+	First->Head = P->next; // Mengatur Head baru menjadi node berikutnya
+	char oprtr = P->oprtr; // Menyimpan nilai operator dari node yang dihapus
+	free(P); // Menghapus node yang diambil dari stack
+	return oprtr; // Mengembalikan nilai operator yang dihapus
 }
+
 
 
 void ViewAsc(Queue First){
@@ -131,191 +133,225 @@ void ViewAsc(Queue First){
 
 void ViewAscStack(Stack First){
 	node P;
-	P=First.Head;
-	if(P!=NULL){
-		
-		while(P!=NULL){
-			if(P->isoperator==1){
-				printf("%c ",P->oprtr);
+	P = First.Head; // Mengambil node pertama dari tumpukan
+	if(P != NULL){
+		// Jika tumpukan tidak kosong
+		while(P != NULL){
+			if(P->isoperator == 1){
+				printf("%c ", P->oprtr); // Mencetak karakter operator dari node saat ini
 			}else{
-				printf("%g ",P->operand);
+				printf("%g ", P->operand); // Mencetak angka operan dari node saat ini
 			}
-			P=P->next;
+			P = P->next; // Pindah ke node berikutnya
 		}
-	}
-	else if(P==NULL){
-		printf("list kosong");
+	}else if(P == NULL){
+		printf("list kosong"); // Jika tumpukan kosong, cetak pesan "list kosong"
 	}
 }
 
-void EnqueOperator(Queue *First,char item,node *P){
-	*P = (address) malloc (sizeof (ElmtList));
-	if(P==NULL){
-		printf("Gagal Alokasi");
+
+void EnqueOperator(Queue *First, char item, node *P){
+	*P = (address) malloc (sizeof (ElmtList)); // Mengalokasikan memori untuk node baru
+	if(P == NULL){
+		printf("Gagal Alokasi"); // Jika alokasi gagal, cetak pesan "Gagal Alokasi"
 	}else{
-		(*P)->oprtr=item;
-		(*P)->next=NULL;
-		(*P)->isoperator=1;
-		if(First->First==NULL){
-			(*First).First=*P;
-			(*First).Last=*P;
-			(*First).Last->next=NULL;	
+		(*P)->oprtr = item; // Menyimpan karakter operator pada node baru
+		(*P)->next = NULL; // Mengatur pointer next pada node baru menjadi NULL
+		(*P)->isoperator = 1; // Menandai bahwa node baru adalah operator
+		
+		if(First->First == NULL){
+			(*First).First = *P; // Jika antrian kosong, node baru menjadi elemen pertama
+			(*First).Last = *P; // Jika antrian kosong, node baru menjadi elemen terakhir
+			(*First).Last->next = NULL; // Mengatur pointer next pada elemen terakhir menjadi NULL
 		}else{
-			(*P)->next=NULL;
-			First->Last->next=*P;
-			First->Last=*P;
+			(*P)->next = NULL; // Mengatur pointer next pada node baru menjadi NULL
+			First->Last->next = *P; // Mengatur pointer next pada elemen terakhir menjadi node baru
+			First->Last = *P; // Mengubah elemen terakhir menjadi node baru
 		}
-	
-}
+	}
 }
 
-void EnqueOperand(Queue *First,float item,node *P){
-	*P = (address) malloc (sizeof (ElmtList));
-	if(P==NULL){
-		printf("Gagal Alokasi");
+
+void EnqueOperand(Queue *First, float item, node *P){
+	*P = (address) malloc (sizeof (ElmtList)); // Mengalokasikan memori untuk node baru
+	if(P == NULL){
+		printf("Gagal Alokasi"); // Jika alokasi gagal, cetak pesan "Gagal Alokasi"
 	}else{
-		(*P)->operand=item;
-		(*P)->next=NULL;
-		(*P)->isoperator=0;
-		if(First->First==NULL){
-			(*First).First=*P;
-			(*First).Last=*P;
-			(*First).Last->next=NULL;	
+		(*P)->operand = item; // Menyimpan nilai operand pada node baru
+		(*P)->next = NULL; // Mengatur pointer next pada node baru menjadi NULL
+		(*P)->isoperator = 0; // Menandai bahwa node baru bukan operator
+		
+		if(First->First == NULL){
+			(*First).First = *P; // Jika antrian kosong, node baru menjadi elemen pertama
+			(*First).Last = *P; // Jika antrian kosong, node baru menjadi elemen terakhir
+			(*First).Last->next = NULL; // Mengatur pointer next pada elemen terakhir menjadi NULL
 		}else{
-			(*P)->next=NULL;
-			First->Last->next=*P;
-			First->Last=*P;
+			(*P)->next = NULL; // Mengatur pointer next pada node baru menjadi NULL
+			First->Last->next = *P; // Mengatur pointer next pada elemen terakhir menjadi node baru
+			First->Last = *P; // Mengubah elemen terakhir menjadi node baru
 		}
-	
+	}
 }
+
 }
 //float kalkulasi()
-void convertPostfix(Queue *Z,Stack *X,char *input){
+void convertPostfix(Queue *Z, Stack *X, char *input) {
 	node P;
-	char token,c;
-	int i,temp;
-//	float num=0,num2;
+	char token, c;
+	int i, temp;
 	float angka;
-	for(i=0;i<strlen(input);i++){
-		token=input[i];
-		if(isdigit(token)){
+
+	for (i = 0; i < strlen(input); i++) {
+		token = input[i];
+
+		if (isdigit(token)) {
+			// Jika token adalah digit, maka membaca angka dan menambahkannya ke antrian operand
 			char num[strlen(input)];
-			int j=0;
-			while(isdigit(input[i]) || input[i]=='.'){
-				num[j++]=input[i];
+			int j = 0;
+			
+			while (isdigit(input[i]) || input[i] == '.') {
+				num[j++] = input[i];
 				i++;
 			}
-			num[j]='\0';
-			angka=strtof(num, NULL);
-			EnqueOperand(&*Z,angka,&P);
+			
+			num[j] = '\0';
+			angka = strtof(num, NULL);
+			EnqueOperand(&*Z, angka, &P);
 			i--;
-		}else if(isOperator(token)&&X->Head!=NULL&&X->Head->oprtr!='('){
-			c=X->Head->oprtr;
-			while(derajatOperator(token)<=derajatOperator(c)&&X->Head!=NULL){
-				EnqueOperator(&*Z,PopStack(&*X),&P);
+		}
+		else if (isOperator(token) && X->Head != NULL && X->Head->oprtr != '(') {
+			// Jika token adalah operator dan tumpukan operator tidak kosong serta operator di atas tumpukan bukan '(',
+			// maka melakukan pemindahan operator dari tumpukan ke antrian berdasarkan prioritas operator
+			c = X->Head->oprtr;
+			
+			while (derajatOperator(token) <= derajatOperator(c) && X->Head != NULL) {
+				EnqueOperator(&*Z, PopStack(&*X), &P);
 			}
-			PushStack(&*X,token,&P);
-			}else if(token == 'l'){
+			
+			PushStack(&*X, token, &P);
+		}
+		else if (token == 'l') {
+			// Jika token adalah 'l' (untuk logaritma), melakukan operasi khusus untuk logaritma
 			char log[10];
 			char Num[100];
 			float angka;
-			float a,hasil;
-			int j = 0,x = 0;
-			if(isdigit(input[i-1])){
-				a=DequeOperand(&*Z);
-				while(input[i]!=')'){
-					if(isdigit(input[i]) || input[i]=='.'){
-						Num[j++]=input[i];
-					} else{
-						log[x++]=input[i];
+			float a, hasil;
+			int j = 0, x = 0;
+
+			if (isdigit(input[i - 1])) {
+				// Jika sebelum 'l' terdapat angka, maka mengambil angka tersebut dan membaca angka yang menjadi argumen logaritma
+				a = DequeOperand(&*Z);
+				
+				while (input[i] != ')') {
+					if (isdigit(input[i]) || input[i] == '.') {
+						Num[j++] = input[i];
+					}
+					else {
+						log[x++] = input[i];
 					}
 					i++;
 				}
-				Num[j]='\0';
-				angka=strtof(Num, NULL);
-				hasil=logaritmaProses(a,angka,log);
-				EnqueOperand(&*Z, hasil,&P);	
-			}else{
-				while(input[i]!=')'){
-					if(isdigit(input[i]) || input[i]=='.'){
-						Num[j++]=input[i];
-					} else{
-						log[x++]=input[i];
+				
+				Num[j] = '\0';
+				angka = strtof(Num, NULL);
+				hasil = logaritmaProses(a, angka, log);
+				EnqueOperand(&*Z, hasil, &P);
+			}
+			else {
+				// Jika tidak terdapat angka sebelum 'l', maka membaca angka yang menjadi argumen logaritma
+				while (input[i] != ')') {
+					if (isdigit(input[i]) || input[i] == '.') {
+						Num[j++] = input[i];
+					}
+					else {
+						log[x++] = input[i];
 					}
 					i++;
 				}
-				Num[j]='\0';
-				angka=strtof(Num, NULL);
-				hasil=logaritmaProses(10,angka,log);
-				EnqueOperand(&*Z, hasil,&P);	
+				
+				Num[j] = '\0';
+				angka = strtof(Num, NULL);
+				hasil = logaritmaProses(10, angka, log);
+				EnqueOperand(&*Z, hasil, &P);
 			}
-		}else if(token==')'){
-			c=X->Head->oprtr;
-			while(c!='('){
-				EnqueOperator(&*Z,PopStack(&*X),&P);
-				c=X->Head->oprtr;
+		}
+		else if (token == ')') {
+			// Jika token adalah ')', melakukan pemindahan operator dari tumpukan ke antrian hingga ditemukan '('
+			c = X->Head->oprtr;
+			
+			while (c != '(') {
+				EnqueOperator(&*Z, PopStack(&*X), &P);
+				c = X->Head->oprtr;
 			}
+			
 			PopStack(&*X);
-		}else{
-			PushStack(&*X,token,&P);
+		}
+		else {
+			// Jika token bukan digit, operator, atau ')', maka menambahkannya ke tumpukan operator
+			PushStack(&*X, token, &P);
 		}
 	}
-	while(X->Head!=NULL){
-		c=PopStack(&*X);
-		EnqueOperator(&*Z,c,&P);
+
+	while (X->Head != NULL) {
+		// Setelah selesai membaca semua token, memindahkan operator yang tersisa dari tumpukan ke antrian
+		c = PopStack(&*X);
+		EnqueOperator(&*Z, c, &P);
 	}
-	
-	
 }
 
-address Create_Tree(Queue Z){
-	
-	address P;
-	address stack[50];
-	node Q;
-	int i, len, top=-1;
-	infotype c;
-	float d;
-	
-	Q=Z.First;
-	
-	while(Q!=NULL){
-		if(Q->isoperator==1){
-			c=Q->oprtr;
-			P=CreateNodeOperator(c);
-			Rson(P)=stack[top--];
-			Lson(P)=stack[top--];
-		}else{
-			d=Q->operand;
-			P=CreateNodeOperand(d);
+
+address Create_Tree(Queue Z) {
+	address P; // variabel untuk menyimpan alamat simpul
+	address stack[50]; // array untuk menampung tumpukan sementara
+	node Q; // variabel untuk mengiterasi melalui antrian
+	int i, len, top = -1; // variabel indeks, panjang antrian, dan indeks puncak tumpukan
+	infotype c; // variabel untuk menyimpan operator
+	float d; // variabel untuk menyimpan operand
+
+	Q = Z.First; // menginisialisasi Q dengan node pertama dalam antrian
+
+	while (Q != NULL) {
+		if (Q->isoperator == 1) {
+			// Jika node dalam antrian adalah operator, membuat simpul dengan operator sebagai data
+			c = Q->oprtr;
+			P = CreateNodeOperator(c);
+			Rson(P) = stack[top--]; // mengambil simpul anak kanan dari tumpukan
+			Lson(P) = stack[top--]; // mengambil simpul anak kiri dari tumpukan
+		} else {
+			// Jika node dalam antrian adalah operand, membuat simpul dengan operand sebagai data
+			d = Q->operand;
+			P = CreateNodeOperand(d);
 		}
-		stack[++top]=P;
-		Q=Q->next;
+		stack[++top] = P; // memasukkan simpul ke dalam tumpukan
+		Q = Q->next; // pindah ke node berikutnya dalam antrian
 	}
-	return(stack[0]);
+	
+	return stack[0]; // mengembalikan alamat akar pohon yang ada di tumpukan
 }
 
-address CreateNodeOperand(float input){
-	address P;
-	P = (address) malloc (sizeof (Tree));
-	P->operand=input;
-	P->isOperator=0;
-	P->Lson=NULL;
-	P->Rson=NULL;
-	return P;
-	
+
+
+address CreateNodeOperand(float input) {
+	address P; // variabel untuk menyimpan alamat simpul
+	P = (address) malloc (sizeof (Tree)); // mengalokasikan memori untuk simpul baru
+	P->operand = input; // menyimpan operand sebagai data pada simpul
+	P->isOperator = 0; // menandai simpul sebagai operand (bukan operator)
+	P->Lson = NULL; // mengatur anak kiri simpul menjadi NULL
+	P->Rson = NULL; // mengatur anak kanan simpul menjadi NULL
+	return P; // mengembalikan alamat simpul yang telah dibuat
 }
 
-address CreateNodeOperator(char input){
-	address P;
-	P = (address) malloc (sizeof (Tree));
-	P->data=input;
-	P->isOperator=1;
-	P->Lson=NULL;
-	P->Rson=NULL;
-	return P;
-	
+
+address CreateNodeOperator(char input) {
+	address P; // variabel untuk menyimpan alamat simpul
+	P = (address) malloc (sizeof (Tree)); // mengalokasikan memori untuk simpul baru
+	P->data = input; // menyimpan operator sebagai data pada simpul
+	P->isOperator = 1; // menandai simpul sebagai operator (bukan operand)
+	P->Lson = NULL; // mengatur anak kiri simpul menjadi NULL
+	P->Rson = NULL; // mengatur anak kanan simpul menjadi NULL
+	return P; // mengembalikan alamat simpul yang telah dibuat
 }
+
 
 double kalkulasi(address P){
 	if(P->isOperator==1){
@@ -338,35 +374,37 @@ double kalkulasi(address P){
 	return P->operand;
 }
 
-float DequeOperand(Queue *A){
-	float q;
-	node First,Last,Throw;
-	First=A->First;
-	Last=A->Last;
-	if(First==NULL){
-		printf("Queue Empty");
-	}else{
-		if(First!=Last){
-			while(First->next!=Last){
-				First=First->next;
+float DequeOperand(Queue *A) {
+	float q; // variabel untuk menyimpan nilai operand yang di-dequeue
+	node First, Last, Throw; // variabel untuk menyimpan penunjuk pada simpul pertama, terakhir, dan simpul yang akan dihapus
+
+	First = A->First; // mengambil penunjuk pada simpul pertama
+	Last = A->Last; // mengambil penunjuk pada simpul terakhir
+
+	if (First == NULL) {
+		printf("Queue Empty"); // jika antrian kosong, cetak pesan "Queue Empty"
+	} else {
+		if (First != Last) {
+			while (First->next != Last) {
+				First = First->next; // mencari simpul sebelum simpul terakhir
 			}
-			Throw=Last;
-			q=Last->operand;
-			A->Last=First;
-			A->Last->next=NULL;
-			free(Throw);
-			return q;
-		}else{
-			Throw=Last;
-			q=Last->operand;
-			A->Last=NULL;
-			A->First=NULL;
-			free(Throw);
-			return q;
+			Throw = Last; // menyimpan penunjuk pada simpul terakhir
+			q = Last->operand; // menyimpan nilai operand pada simpul terakhir
+			A->Last = First; // mengatur penunjuk simpul terakhir menjadi simpul sebelum simpul terakhir
+			A->Last->next = NULL; // mengatur penunjuk next simpul terakhir menjadi NULL
+			free(Throw); // menghapus simpul terakhir
+			return q; // mengembalikan nilai operand yang di-dequeue
+		} else {
+			Throw = Last; // menyimpan penunjuk pada simpul terakhir
+			q = Last->operand; // menyimpan nilai operand pada simpul terakhir
+			A->Last = NULL; // mengatur penunjuk simpul terakhir menjadi NULL
+			A->First = NULL; // mengatur penunjuk simpul pertama menjadi NULL
+			free(Throw); // menghapus simpul terakhir
+			return q; // mengembalikan nilai operand yang di-dequeue
 		}
-		
 	}
 }
+
 
 double simbol_operasi_trigonometri(double sudut, char operator[]){
 	if(strcmp(operator,"sin(")==0){
