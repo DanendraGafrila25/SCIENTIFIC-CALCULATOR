@@ -2,6 +2,7 @@
 #define Aqila_h
 #include <stdio.h>
 
+<<<<<<< HEAD
 // logaritma
 double logaritma(double num1, double num2) {
     if (num2 <= 0 || num1 <= 0) {
@@ -15,6 +16,47 @@ double logaritma(double num1, double num2) {
         }
         return hasil;
     }
+=======
+<<<<<<< HEAD
+//logaritma
+double logaritma(double num1, double num2, char* input) {
+	if (strcmp(input, "log") == 0) {
+		if (num2 <= 0 || num1 <= 0) {
+			printf("Invalid input\n");
+			return 0.0 / 0.0; 
+		} else {
+			double hasil = 0.0;
+			while (num2 >= num1) {
+				num2 /= num1;
+				hasil += 1.0;
+			}
+			return hasil;
+		}
+	} else if (strcmp(input, "ln") == 0) {
+		return log(num2);
+	}
+=======
+double logaritma(double num1, double num2) {
+    double hasil = num2;
+    double sisa;
+
+    if (num2 <= 0 || num1 <= 0) {
+        printf("Invalid input\n");
+        return 0.0/0.0;
+    } else if (num1 == num2) {
+        return 1;
+    } else {
+        while (hasil >= num1) {
+                hasil /= num1;
+                hasil += 1;
+        }
+        if(hasil != 1){
+        	hasil+=hasil/num1;
+		}
+    }
+
+>>>>>>> c32adeca7a6f8ae709672a37f03c9eebbae5aa32
+>>>>>>> e584fc6b30d1a8ca0958659c6738002b5c918d3b
 }
 
 //trigonometri
