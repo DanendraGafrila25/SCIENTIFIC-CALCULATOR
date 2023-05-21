@@ -47,7 +47,7 @@ double simbol_operasi(double num1, double num2, char operator) {
     }
 }
 
-void Operasi_hitung(){
+/*void Operasi_hitung(){
 	double result = 0;
 	for(;;){
     	char ekspresi[100];
@@ -181,6 +181,6 @@ void Operasi_hitung(){
 		system("pause");
 		system("cls");
 	}
-}
+}*/
 
 #endif

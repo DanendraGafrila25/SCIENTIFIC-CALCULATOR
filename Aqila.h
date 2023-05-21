@@ -3,11 +3,22 @@
 #include <stdio.h>
 
 //logaritma
-  double logaritma(double x, double basis) {
-    double hasil = 0.0;
-
-	hasil = log(x)/log(basis);
-    return hasil;
+double logaritma(double num1, double num2, char* input) {
+	if (strcmp(input, "log") == 0) {
+		if (num2 <= 0 || num1 <= 0) {
+			printf("Invalid input\n");
+			return 0.0 / 0.0; 
+		} else {
+			double hasil = 0.0;
+			while (num2 >= num1) {
+				num2 /= num1;
+				hasil += 1.0;
+			}
+			return hasil;
+		}
+	} else if (strcmp(input, "ln") == 0) {
+		return log(num2);
+	}
 }
 
 
