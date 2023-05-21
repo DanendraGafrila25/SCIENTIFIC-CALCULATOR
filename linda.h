@@ -1,5 +1,7 @@
 #ifndef linda_h
 #define linda_h
+#define PI 3.14159265358979323846
+#define SUDUT 180.0
 
 int compare(const void *a, const void *b) {
     return (*(float*)a - *(float*)b);

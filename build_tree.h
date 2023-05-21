@@ -1,5 +1,6 @@
 #ifndef build_tree_h
-#define build_tree_h#include <stdio.h>
+#define build_tree_h
+#include <stdio.h>
 
 #include <stdlib.h>
 
@@ -192,7 +193,7 @@ void EnqueOperand(Queue * First, float item, node * P) {
   }
 }
 
-}
+
 //float kalkulasi()
 void convertPostfix(Queue * Z, Stack * X, char * input) {
   node P;
@@ -412,27 +413,6 @@ double simbol_operasi_trigonometri(double sudut, char operator[]) {
   } else if (strcmp(operator, "cot(") == 0) {
     return operasiCotangen(sudut);
   } else {
-    if (strcmp(operator, "SIN") == 0 || strcmp(operator, "SIN(") == 0 || strcmp(operator, "sin") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya sin(...), contoh sin(60)", operator);
-    } else if (strcmp(operator, "COS") == 0 || strcmp(operator, "COS(") == 0 || strcmp(operator, "cos") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya cos(...), contoh cos(45)", operator);
-    } else if (strcmp(operator, "TAN") == 0 || strcmp(operator, "TAN(") == 0 || strcmp(operator, "tan") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya tan(...), contoh tan(30)", operator);
-    } else if (strcmp(operator, "ASIN") == 0 || strcmp(operator, "ASIN(") == 0 || strcmp(operator, "asin") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya asin(...), contoh asin(0.5)", operator);
-    } else if (strcmp(operator, "ACOS") == 0 || strcmp(operator, "ACOS(") == 0 || strcmp(operator, "acos") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya acos(...), contoh acos(0.5)", operator);
-    } else if (strcmp(operator, "ATAN") == 0 || strcmp(operator, "ATAN(") == 0 || strcmp(operator, "atan") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya atan(...), contoh atan(0.5)", operator);
-    } else if (strcmp(operator, "CSC") == 0 || strcmp(operator, "CSC(") == 0 || strcmp(operator, "csc") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya csc(...), contoh csc(40)", operator);
-    } else if (strcmp(operator, "SEC") == 0 || strcmp(operator, "SEC(") == 0 || strcmp(operator, "sec") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya sec(...), contoh sec(0.5)", operator);
-    } else if (strcmp(operator, "COT") == 0 || strcmp(operator, "COT(") == 0 || strcmp(operator, "cot") == 0) {
-      printf("Error, operator yang anda masukkan: %s, seharusnya COT(...), contoh cot(0.5)", operator);
-    } else {
-      printf("Operator Tidak Diketahui sin: %s", operator);
-    }
     exit(1);
   }
 }
