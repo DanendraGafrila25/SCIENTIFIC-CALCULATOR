@@ -13,26 +13,37 @@
 #include "tree.h"
 #include "build_tree.h"
 
-
 int main(){
-	float hasil;
-	char input[100],temp;
-	address P;
-	Stack X;
-	Queue Z;
-	node Q;
-	Z.First=NULL;
-	Z.Last=NULL;
-	X.Head=NULL;
-	PrintFromFile("asset.txt");
-	printf("\n\nMasukkan Ekspresi:");
-	scanf("%s",&input);fflush(stdin);
-	convertPostfix(&Z,&X,input);
-	P=Create_Tree(Z);
-	hasil=kalkulasi(P);
-	printf("hasilnya adalah %g\n",hasil);
-	printf("PostOrder: ");
-	PostOrder(P);
-//	Operasi_hitung();
-	return 0;
+	for(;;){
+		system("cls");
+		float hasil;
+		char input[100], temp, lagi;
+		address P;
+		Stack X;
+		Queue Z;
+		node Q;
+		Z.First=NULL;
+		Z.Last=NULL;
+		X.Head=NULL;
+		PrintFromFile("asset.txt");
+		gotoxy(22, 1);
+		scanf("%s",&input);fflush(stdin);
+		convertPostfix(&Z,&X,input);
+		P=Create_Tree(Z);
+		hasil=kalkulasi(P);
+		gotoxy(22, 2);
+		printf("= %g",hasil);
+		gotoxy(0, 14);
+		printf("\n\t\t\tLagi?(y/n)");
+		fflush(stdin);
+		scanf("%c", &lagi);
+		if(lagi=='n'){
+			return 0;
+		}else{
+			P->Lson=NULL;
+			P->Rson=NULL;
+			free(P);
+		}
+		gotoxy(0, 20);
+	}
 }
