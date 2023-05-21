@@ -49,6 +49,7 @@ float logaritmaProses(float num1, float num2, char *input) {
 	    }
 		return 2 * hasil;
 	}
+<<<<<<< HEAD
 	
 	void PrintFromFile(const char* location){
 	FILE *read;
@@ -63,4 +64,6 @@ float logaritmaProses(float num1, float num2, char *input) {
 }
 	
 
+=======
+>>>>>>> 83665bbb0da1e7138505be8feeae19b9a805de6b
 #endif
