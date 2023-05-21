@@ -16,7 +16,7 @@ float logNatural(float num);
 		    printf("Invalid input\n");
 		    return 0.0 / 0.0;
 		} else {
-			hasil = logNatural(num2)/logNatural(num1);
+			hasil = logNatural(num2)/logNatural(num1); //Rumus untuk mengonversi logartima (log(e) = ln(base) / ln(e))
 		    return hasil;
 		}
 	    } else if (strcmp(input, "ln(") == 0) {
