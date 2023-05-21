@@ -269,7 +269,37 @@ void convertPostfix(Queue * Z, Stack * X, char * input) {
         hasil = logaritmaProses(10, angka, log);
         EnqueOperand( & * Z, hasil, & P);
       }
-    } else if (token == ')') {
+    }else if(input[i] == 's' || input[i] == 'c' || input[i] == 't' || input[i] == 'a'){
+		// jika trigonometri
+		int j = 0, k = 0, l;
+		double number;
+		char trigono[7], angka[10];
+		bool negatif = false;
+		
+		while(!isdigit(input[i]) && input[i] != '-'){
+			trigono[j] = input[i];
+			j++;
+			i++;
+		}
+		for(l = j; l < 9; l++){
+			trigono[l] = '\0';
+		}
+		
+		while(isdigit(input[i]) || input[i] == '.' || input[i] == '-'){
+			if(input[i] == '-'){
+				negatif = true;
+			}
+			angka[k] = input[i];
+			k++;
+			i++;
+		}
+		number = strtod(angka, NULL);
+		if(negatif == true){
+			number = 360 - (-number);
+		}
+		number = simbol_operasi_trigonometri(number, trigono);
+		EnqueOperand(&*Z, number, &P);
+    }else if (token == ')') {
       // Jika token adalah ')', melakukan pemindahan operator dari tumpukan ke antrian hingga ditemukan '('
       c = X -> Head -> oprtr;
 
