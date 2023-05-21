@@ -62,6 +62,14 @@ int combination(int n, int r) {
     return faktorial(n) / (faktorial(r) * faktorial(n-r));
 }
 
+int menuKombinatorial(int n, int r, char input){
+	if(input == 'C'){
+		return combination(n, r);
+	}else{
+		return permutation(n, r);
+	}
+}
+
 int faktorial(int angka){
 	int result = 1;
 	if(angka >= 0){
