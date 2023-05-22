@@ -44,6 +44,6 @@ address Create_Tree(Queue Z);
 address CreateNodeOperand(float input);
 address CreateNodeOperator(char input);
 double kalkulasi(address P);
-float DequeOperand(Queue *A);
+double DequeOperand(Queue *A);
 
 #endif
