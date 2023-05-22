@@ -101,4 +101,11 @@ int faktorial(int angka) {
 	}
 }
 
+int modulus(int dividen, int divisor){
+	while(dividen >= divisor){
+		dividen -= divisor;
+	}
+	return dividen;
+}
+
 #endif
