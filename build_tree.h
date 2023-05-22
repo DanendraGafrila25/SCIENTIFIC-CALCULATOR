@@ -152,6 +152,22 @@ void convertPostfix(Queue* Z, Stack* X, char* input) {
 			}
 			number = simbol_operasi_trigonometri(number, trigono);
 			EnqueOperand(&*Z, number, &P);
+		}else if(token == 'm'){
+			int dividen, divisor, j = 0;
+			char* number = malloc (16 * sizeof(char));
+			
+			if(isdigit(input[i-1])){
+				dividen = DequeOperand(&*Z);
+			}
+			while(input[i] != ')'){
+				if(isdigit(input[i]) || input[i] == '.' || input[i] == '-'){
+					number[j++] = input[i];
+				}
+				i++;
+			}
+			divisor = strtod(number, NULL);
+			dividen = modulus(dividen, divisor);
+			EnqueOperand(&*Z, dividen, &P);
 		}else if(token == '!'){
 			double a;
 			if(isdigit(input[i-1])){
