@@ -1,12 +1,5 @@
 #ifndef Aqila_h
 #define Aqila_h
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include "tree.h"
-
-double logaritmaProses(double num1, double num2, char *input);
-double logNatural(double num);
 
 double DequeOperand(Queue* A) {
 	double q; // variabel untuk menyimpan nilai operand yang di-dequeue
@@ -80,6 +73,27 @@ void EnqueOperand(Queue* First, float item, node* P){
 }
 
 //logaritma
+double logNatural(double num) {
+	if (num <= 0) {
+		printf("Error: Argumen harus lebih besar dari 0.\n"); // Menampilkan pesan kesalahan jika argumen kurang dari atau sama dengan 0
+		return -1; // Mengembalikan nilai -1 sebagai tanda kesalahan
+	}
+	
+	double epsilon = 1e-13; // Akurasi yang diinginkan
+	double hasil = 0.0; // Variabel untuk menyimpan hasil logaritma natural
+	double term = (num - 1) / (num + 1); // Menghitung suku pertama dalam deret logaritma natural
+	double current_term = term; // Variabel untuk menyimpan suku saat ini dalam deret
+	int n = 1; // Variabel untuk menghitung jumlah suku dalam deret
+	
+	while (current_term >= epsilon) { // Melakukan perulangan hingga suku saat ini tidak lagi memenuhi akurasi yang diinginkan
+		hasil += current_term; // Menambahkan suku saat ini ke dalam hasil logaritma natural
+		current_term = current_term * term * term * (2 * n - 1) / (2 * n + 1); // Menghitung suku berikutnya dalam deret
+		n++; // Meningkatkan jumlah suku dalam deret
+	}
+	
+	return 2 * hasil; // Mengembalikan hasil logaritma natural (hasil dikalikan dengan 2 karena rumus logaritma natural asli hanya menghitung separuh dari hasil yang dihasilkan oleh deret Taylor ini)
+}
+
 double logaritmaProses(double num1, double num2, char *input) {
 	double hasil = 0.0;
 	
@@ -102,26 +116,6 @@ double logaritmaProses(double num1, double num2, char *input) {
 	}
 }
 
-double logNatural(double num) {
-	if (num <= 0) {
-		printf("Error: Argumen harus lebih besar dari 0.\n"); // Menampilkan pesan kesalahan jika argumen kurang dari atau sama dengan 0
-		return -1; // Mengembalikan nilai -1 sebagai tanda kesalahan
-	}
-	
-	double epsilon = 1e-13; // Akurasi yang diinginkan
-	double hasil = 0.0; // Variabel untuk menyimpan hasil logaritma natural
-	double term = (num - 1) / (num + 1); // Menghitung suku pertama dalam deret logaritma natural
-	double current_term = term; // Variabel untuk menyimpan suku saat ini dalam deret
-	int n = 1; // Variabel untuk menghitung jumlah suku dalam deret
-	
-	while (current_term >= epsilon) { // Melakukan perulangan hingga suku saat ini tidak lagi memenuhi akurasi yang diinginkan
-		hasil += current_term; // Menambahkan suku saat ini ke dalam hasil logaritma natural
-		current_term = current_term * term * term * (2 * n - 1) / (2 * n + 1); // Menghitung suku berikutnya dalam deret
-		n++; // Meningkatkan jumlah suku dalam deret
-	}
-	
-	return 2 * hasil; // Mengembalikan hasil logaritma natural (hasil dikalikan dengan 2 karena rumus logaritma natural asli hanya menghitung separuh dari hasil yang dihasilkan oleh deret Taylor ini)
-}
 
 
 void PrintFromFile(const char* location){
