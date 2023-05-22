@@ -1,6 +1,5 @@
 #ifndef faras_h
 #define faras_h
-#include "tree.h"
 
 double penjumlahan(double a, double b){
     return a + b;
