@@ -1,6 +1,6 @@
 #ifndef tree_h
 #define tree_h
-#include <ctype.h>
+
 #define Data(P) (P)->data
 #define Rson(P) (P)->Rson
 #define Lson(P) (P)->Lson
@@ -11,7 +11,7 @@ typedef struct Elemen *address;
 typedef struct Elemen{
 	address Lson;
 	infotype data;
-	float operand;
+	double operand;
 	int isOperator;
 	address Rson;
 }Tree;
@@ -19,7 +19,7 @@ typedef struct Elemen{
 typedef struct Node *node;
 typedef struct Node{
 	infotype oprtr;
-	float operand;
+	double operand;
 	int isoperator;
 	node next;
 }ElmtList;
