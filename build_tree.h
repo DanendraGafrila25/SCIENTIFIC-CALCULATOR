@@ -1,41 +1,28 @@
 #ifndef build_tree_h
 #define build_tree_h
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
-#include <windows.h>
-
-#include "tree.h"
-#include "rizki.h"
-#include "Aqila.h"
-#include "faras.h"
-#include "linda.h"
-
 // Fungsi untuk mengonversi ekspresi infix menjadi postfix
 void convertPostfix(Queue* Z, Stack* X, char* input) {
 	node P;
 	char token, c;
 	int i, temp;
-	float angka;
+	double angka;
 
 	for(i = 0; i < strlen(input); i++){
 		token = input[i];
 
-		if(isdigit(token) || (input[i] == '-' && !isdigit(input[i-1]) && isdigit(input[i+1]))){
+		if(isdigit(token) || (input[i] == '-' && !isdigit(input[i-1]) && isdigit(input[i+1]) && i == 0)){
 			// Jika token adalah digit, maka membaca angka dan menambahkannya ke antrian operand
 			char num[strlen(input)];
 			int j = 0;
 
-			while(isdigit(input[i]) || input[i] == '.' || input[i] == '-'){
+			while(isdigit(input[i]) || input[i] == '.' || (input[i] == '-' && i == 0)){
 				num[j++] = input[i];
 				i++;
 			}
 
 			num[j] = '\0';
-			angka = strtof(num, NULL);
+			angka = strtod(num, NULL);
 			EnqueOperand(&*Z, angka, &P);
 			i--;
 		}else if(isOperator(token) && X->Head != NULL && X->Head->oprtr != '('){
@@ -52,13 +39,12 @@ void convertPostfix(Queue* Z, Stack* X, char* input) {
 			// Jika token adalah 'l' (untuk logaritma), melakukan operasi khusus untuk logaritma
 			char log[4];
 			char Num[10];
-			double angka;
-			double a, hasil;
+			double numerus, basis, hasil;
 			int j = 0, k, y, x = 0;
 
 			if(isdigit(input[i - 1])){
 				// Jika sebelum 'l' terdapat angka, maka mengambil angka tersebut dan membaca angka yang menjadi argumen logaritma
-				a = DequeOperand(&*Z);
+				basis = DequeOperand(&*Z);
 				while(input[i] != ')'){
 					if (isdigit(input[i]) || input[i] == '.') {
 						Num[j++] = input[i];
@@ -68,8 +54,8 @@ void convertPostfix(Queue* Z, Stack* X, char* input) {
 					i++;
 				}
 				Num[j] = '\0';
-				angka = strtof(Num, NULL);
-				hasil = logaritmaProses(a, angka, log);
+				numerus = strtof(Num, NULL);
+				hasil = logaritmaProses(basis, numerus, log);
 				EnqueOperand(&*Z, hasil, &P);
 			}else{
 				// Jika tidak terdapat angka sebelum 'l', maka membaca angka yang menjadi argumen logaritma
@@ -90,8 +76,8 @@ void convertPostfix(Queue* Z, Stack* X, char* input) {
 					Num[y] = '\0';
 				}
 
-				angka = strtof(Num, NULL);
-					hasil = logaritmaProses(10, angka, log);
+				numerus = strtof(Num, NULL);
+				hasil = logaritmaProses(10, numerus, log);
 				EnqueOperand(&*Z, hasil, &P);
 			}       
 		}else if(input[i] == '|'){ // nilai mutlak
