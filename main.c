@@ -34,7 +34,7 @@ int main(){
 		gotoxy(22, 2);
 		printf("= %g",hasil);
 		gotoxy(0, 14);
-		printf("\n\t\t\tLagi?(y/n)");
+		printf("\n\n\n\n\t\t\tLagi?(y/n)");
 		fflush(stdin);
 		scanf("%c", &lagi);
 		if(lagi=='n'){
