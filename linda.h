@@ -1,6 +1,5 @@
 #ifndef linda_h
 #define linda_h
-#include "tree.h"
 
 double eksponen(double base, double exponent){
 	double hasil = 1.0;
