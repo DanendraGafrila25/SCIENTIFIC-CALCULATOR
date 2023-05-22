@@ -1,12 +1,6 @@
 #ifndef danendra_h
 #define danendra_h
 
-#include "Aqila.h"
-#include "faras.h"
-#include "linda.h"
-#include "rizki.h"
-#include "tree.h"
-
 int derajatOperator(infotype oper){
 	if(oper == '+' || oper == '-'){
 		return 1;
@@ -35,7 +29,7 @@ address Create_Tree(Queue Z){
 	node Q; // variabel untuk mengiterasi melalui antrian
 	int i, len, top = -1; // variabel indeks, panjang antrian, dan indeks puncak tumpukan
 	infotype c; // variabel untuk menyimpan operator
-	float d; // variabel untuk menyimpan operand
+	double d; // variabel untuk menyimpan operand
 	
 	Q = Z.First; // menginisialisasi Q dengan node pertama dalam antrian
 	
