@@ -4,19 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
-#include "danendra.h"
+#include "tree.h"
 #include "Aqila.h"
+#include "danendra.h"
 #include "faras.h"
 #include "linda.h"
 #include "rizki.h"
-#include "tree.h"
 #include "build_tree.h"
 
 int main(){
 	for(;;){
 		system("cls");
-		float hasil;
+		double hasil;
 		char input[100], temp, lagi;
 		address P;
 		Stack X;
@@ -30,9 +31,13 @@ int main(){
 		scanf("%s",&input);fflush(stdin);
 		convertPostfix(&Z,&X,input);
 		P=Create_Tree(Z);
-		hasil=kalkulasi(P);
 		gotoxy(22, 2);
-		printf("= %g",hasil);
+		hasil=kalkulasi(P);
+		if(hasil >= 1000000){
+			printf("= %lf",hasil);
+		}else{
+			printf("= %g",hasil);	
+		}
 		gotoxy(0, 14);
 		printf("\n\n\n\n\t\t\tLagi?(y/n)");
 		fflush(stdin);
